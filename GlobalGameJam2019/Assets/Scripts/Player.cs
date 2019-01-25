@@ -30,6 +30,11 @@ public class Player : MonoBehaviour
     public float wallStickTime = .25f;
     private float timeToWallUnstick;
     
+    [Header("Weapon values")]
+    public GameObject weaponContainer;
+    public float weaponDistanceFromHolder;
+    private bool isHoldingWeapon = false;
+
     private float gravity;
     private float jumpVelocity;
     private Vector3 velocity;
@@ -41,12 +46,24 @@ public class Player : MonoBehaviour
     {
         controller = GetComponent<Controller2D>();
 
+        //Setting up movement values
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         print("Gravity: " + gravity + "  Jump Velocity: " + jumpVelocity);
+
+        //Instantiating the weapon holder
+        weaponContainer = GameObject.Instantiate(new GameObject("WeaponHolder: " + playerID),transform.position, Quaternion.identity);
+        weaponContainer.transform.parent = gameObject.transform;
+
     }
 
     private void FixedUpdate()
+    {
+       UpdateMovement();
+       UpdateWeaponDirection();
+    }
+
+    private void UpdateMovement()
     {
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         int wallDirX = (controller.collisions.left) ? -1 : 1;
@@ -56,22 +73,22 @@ public class Player : MonoBehaviour
             (controller.collisions.below) ? accelerationTimeGround : accelerationTimeAir);
 
         bool wallSliding = false;
-        if ((controller.collisions.left || controller.collisions.right) && !controller.collisions.below &&
+        if((controller.collisions.left || controller.collisions.right) && !controller.collisions.below &&
             velocity.y < 0)
         {
             wallSliding = true;
 
-            if (velocity.y < -wallSlideSpeedMax)
+            if(velocity.y < -wallSlideSpeedMax)
             {
                 velocity.y = -wallSlideSpeedMax;
             }
 
-            if (timeToWallUnstick > 0)
+            if(timeToWallUnstick > 0)
             {
                 velocityXSmoothing = 0;
                 velocity.x = 0;
 
-                if (input.x != wallDirX && input.x != 0)
+                if(input.x != wallDirX && input.x != 0)
                 {
                     timeToWallUnstick -= Time.deltaTime;
                 }
@@ -88,32 +105,32 @@ public class Player : MonoBehaviour
         }
 
         //Head check
-        if (controller.collisions.above)
+        if(controller.collisions.above)
         {
             velocity.y = 0;
         }
 
         //Ground check
-        if (controller.collisions.below)
+        if(controller.collisions.below)
         {
             velocity.y = 0;
             jumpsRemaining = numberOfJumps;
         }
 
 
-        if (Input.GetButton("Jump"))
+        if(Input.GetButton("Jump"))
         {
             bool walljumped = false;
 
-            if (wallSliding)
+            if(wallSliding)
             {
                 walljumped = true;
-                if (wallDirX == input.x)
+                if(wallDirX == input.x)
                 {
                     velocity.x = -wallDirX * wallJumpClimb.x;
                     velocity.y = wallJumpClimb.y;
                 }
-                else if (input.x == 0)
+                else if(input.x == 0)
                 {
                     velocity.x = -wallDirX * wallJumpOff.x;
                     velocity.y = wallJumpOff.y;
@@ -124,12 +141,12 @@ public class Player : MonoBehaviour
                     velocity.y = wallLeap.y;
                 }
             }
-            if (controller.collisions.below || ((Time.time - lastJumpTime > jumpDelay) && (jumpsRemaining > 0)))
+            if(controller.collisions.below || ((Time.time - lastJumpTime > jumpDelay) && (jumpsRemaining > 0)))
             {
                 lastJumpTime = Time.time;
                 float deacrease = (numberOfJumps - jumpsRemaining) * extraJumpDecrease;
                 velocity.y = jumpVelocity - deacrease;
-                if (walljumped && !wallJumpsCountAsDoubleJumps)
+                if(walljumped && !wallJumpsCountAsDoubleJumps)
                     jumpsRemaining++;
 
                 jumpsRemaining--;
@@ -138,5 +155,26 @@ public class Player : MonoBehaviour
 
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void UpdateWeaponDirection()
+    {
+        Vector2 input = new Vector2(Input.GetAxisRaw("WeaponHorizontal"), Input.GetAxisRaw("WeaponVertical"));
+
+    }
+
+    private void FindClosestWeaponInRange()
+    {
+        
+    }
+
+    private void PickupWeapon()
+    {
+        
+    }
+
+    private void DropWeapon()
+    {
+        
     }
 }
