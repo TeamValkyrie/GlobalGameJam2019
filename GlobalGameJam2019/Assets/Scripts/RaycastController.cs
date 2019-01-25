@@ -2,34 +2,25 @@
 using System.Collections;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class RaycastController : MonoBehaviour
+public class RaycastController: MonoBehaviour
 {
+
     public LayerMask collisionMask;
 
-    public const float skinWidth = .015f;
-    const float dstBetweenRays = .25f;
-    public int horizontalRayCount;
-    public int verticalRayCount;
+    public const float skinWidth = .55f;
+    public int horizontalRayCount = 4;
+    public int verticalRayCount = 4;
 
     [HideInInspector] public float horizontalRaySpacing;
     [HideInInspector] public float verticalRaySpacing;
 
-    [HideInInspector] public BoxCollider2D collider;
-    [HideInInspector] public RaycastOrigins raycastOrigins;
-
-    public struct RaycastOrigins
-    {
-        public Vector2 topLeft, topRight;
-        public Vector2 bottomLeft, bottomRight;
-    }
-
-    public virtual void Awake()
-    {
-        collider = GetComponent<BoxCollider2D>();
-    }
+    [HideInInspector]
+    public BoxCollider2D collider;
+    public RaycastOrigins raycastOrigins;
 
     public virtual void Start()
     {
+        collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
     }
 
@@ -49,14 +40,16 @@ public class RaycastController : MonoBehaviour
         Bounds bounds = collider.bounds;
         bounds.Expand(skinWidth * -2);
 
-        float boundsWidth = bounds.size.x;
-        float boundsHeight = bounds.size.y;
-
-        horizontalRayCount = Mathf.RoundToInt(boundsHeight / dstBetweenRays);
-        verticalRayCount = Mathf.RoundToInt(boundsWidth / dstBetweenRays);
+        horizontalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue);
+        verticalRayCount = Mathf.Clamp(verticalRayCount, 2, int.MaxValue);
 
         horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
         verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
     }
 
+    public struct RaycastOrigins
+    {
+        public Vector2 topLeft, topRight;
+        public Vector2 bottomLeft, bottomRight;
+    }
 }
