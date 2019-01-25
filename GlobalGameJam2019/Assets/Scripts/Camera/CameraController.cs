@@ -29,6 +29,9 @@ public class CameraController : MonoBehaviour
     [SerializeField]
     private float zoomLimiter = 5.0f;
 
+    [SerializeField]
+    private bool enableZooming = true;
+
     private Vector3 velocity;
     private List<Transform> targets;
     private Camera mainCamera;
@@ -62,7 +65,11 @@ public class CameraController : MonoBehaviour
         }
 
         Move();
-        Zoom();
+
+        if (enableZooming)
+        {
+            Zoom();
+        }
     }
 
     // Attempt to find targets with the right tag
