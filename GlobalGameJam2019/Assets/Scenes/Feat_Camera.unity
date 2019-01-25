@@ -568,7 +568,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2124120354}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99d9d8da65a08654eb57ffad74c84e4b, type: 3}
+  m_Script: {fileID: 11500000, guid: 70fcefbaad8f851488997c56eb108a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Player
@@ -577,5 +577,3 @@ MonoBehaviour:
   minZoom: 40
   maxZoom: 10
   zoomLimiter: 50
-  maxHeight: 5
-  minHeight: -1
