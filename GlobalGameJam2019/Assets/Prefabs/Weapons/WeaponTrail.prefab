@@ -13,7 +13,7 @@ GameObject:
   m_Layer: 0
   m_Name: WeaponTrail
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -69,10 +69,10 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.2
+  m_Time: 0.3
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 5
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -86,23 +86,14 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.15607473
-        value: 0.6624964
-        inSlope: -6.104666
-        outSlope: -6.104666
+        time: 0.5039037
+        value: 0.49131906
+        inSlope: -2.7649927
+        outSlope: -2.7649927
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.32484046
-        value: 0.11890721
-        inSlope: -0.5079413
-        outSlope: -0.5079413
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.16283874
+        outWeight: 0.26537135
       - serializedVersion: 3
         time: 1
         value: 0
