@@ -120,9 +120,9 @@ public class GameManager : MonoBehaviour
 
     private void SpawnPlayers()
     {
-        foreach(GameObject player in playerManager.playerCharacters)
-        {
-            playerManager.SpawnPlayer(player.GetComponent<Player>().playerID);
+        for(int i = 0; i < playerManager.GetConnectedPlayers(); i++)
+        { 
+            playerManager.SpawnPlayer(i);
         }
     }
 
