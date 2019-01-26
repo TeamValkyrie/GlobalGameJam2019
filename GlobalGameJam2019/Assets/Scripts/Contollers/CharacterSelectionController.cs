@@ -26,6 +26,7 @@ public class CharacterSelectionController : MonoBehaviour
     public GameObject startPanel;
     public GameObject startIndicator;
     public Sprite unknownCharacter;
+    public Sprite placeholder;
 
     private PlayerManager playerManager;
     private List<PlayerSelection> playerSelections;
@@ -41,7 +42,7 @@ public class CharacterSelectionController : MonoBehaviour
         foreach (PlayerUI playerUI in playerInterfaces)
         {
             playerUI.preview.sprite = unknownCharacter;
-            playerUI.title.sprite = unknownCharacter;
+            playerUI.title.sprite = placeholder;
             PlayerSelection playerSelection = new PlayerSelection();
             playerSelection.characterIndex = -1;
             playerSelection.isReady = false;
