@@ -54,8 +54,9 @@ MonoBehaviour:
   - {fileID: 8815448896636477655}
   PhyiscalColliders:
   - {fileID: 5243944591021950431}
-  knockbackForce: 10
+  knockbackForce: 100
   isHeld: 0
+  carrier: {fileID: 0}
 --- !u!61 &8815448896636477655
 BoxCollider2D:
   m_ObjectHideFlags: 0

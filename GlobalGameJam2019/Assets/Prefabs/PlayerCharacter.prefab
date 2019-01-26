@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 506375703}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10, y: 0, z: 0}
+  m_LocalPosition: {x: 16.48, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2106109389}
@@ -107,7 +107,11 @@ GameObject:
   - component: {fileID: 9110940700058418187}
   - component: {fileID: 3121050572088074673}
   - component: {fileID: 452669534}
+<<<<<<< Updated upstream
   - component: {fileID: 7475132263821604462}
+=======
+  - component: {fileID: 8873714337123545089}
+>>>>>>> Stashed changes
   m_Layer: 10
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -192,6 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 1
+  isDead: 0
   accelerationTimeAir: 0.1
   accelerationTimeGround: 0.2
   movementSpeed: 235
@@ -212,17 +217,22 @@ MonoBehaviour:
   wallStickTime: 0
   weaponContainer: {fileID: 506375703}
   weaponCenterpoint: {fileID: 2106109388}
-  weaponThrowForce: 10
+  weaponThrowForce: 2000
   weaponDistanceFromHolder: 10
   weaponRotationSpeed: 10
   pickupRange: 10
   pickupTag: Weapon
+<<<<<<< Updated upstream
   walkingParticle: {fileID: 0}
   audioSource: {fileID: 0}
   jumpFX:
   - {fileID: 8300000, guid: e7a00867a23d5094ab2a597cd8f7ac94, type: 3}
   - {fileID: 8300000, guid: 6ad91375b51fc4f4da85bde8a167eb73, type: 3}
   - {fileID: 8300000, guid: 99a4d87912e893c4fb660b88280e2816, type: 3}
+=======
+  knockbacktime: 0.2
+  knockbacktimeleft: 0.2
+>>>>>>> Stashed changes
 --- !u!95 &452669534
 Animator:
   serializedVersion: 3
@@ -242,13 +252,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+<<<<<<< Updated upstream
 --- !u!82 &7475132263821604462
 AudioSource:
+=======
+--- !u!50 &8873714337123545089
+Rigidbody2D:
+  serializedVersion: 4
+>>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353481349862023599}
+<<<<<<< Updated upstream
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 243585594495100232, guid: 994b87fae7200794f979caf590f04dec,
@@ -339,6 +356,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+=======
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+>>>>>>> Stashed changes
 --- !u!1001 &3225250503173493151
 PrefabInstance:
   m_ObjectHideFlags: 0
