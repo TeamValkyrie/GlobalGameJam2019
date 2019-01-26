@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3121050572088074673}
   m_Layer: 0
   m_Name: PlayerCharacter
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,8 +80,8 @@ MonoBehaviour:
   horizontalRaySpacing: 0
   verticalRaySpacing: 0
   collider: {fileID: 0}
-  maxClimbAngle: 80
-  maxDescendAngle: 80
+  maxClimbAngle: 45
+  maxDescendAngle: 45
 --- !u!114 &3121050572088074673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,22 +95,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerID: 0
-  accelerationTimeAir: 0.2
-  accelerationTimeGround: 0.1
-  moveSpeed: 20
-  timeToJumpApex: 0.3
-  jumpHeight: 10
-  numberOfJumps: 3
-  extraJumpDecrease: 0
+  accelerationTimeAir: 0.1
+  accelerationTimeGround: 0.2
+  moveSpeed: 235
+  timeToJumpApex: 0.4
+  jumpHeight: 60
+  numberOfJumps: 2
+  extraJumpDecrease: 35
   jumpDelay: 0.3
-  wallJumpsCountAsDoubleJumps: 1
+  wallJumpsCountAsDoubleJumps: 0
   jumpsRemaining: 0
   lastJumpTime: 0
-  wallJumpClimb: {x: 10, y: 10}
-  wallJumpOff: {x: 10, y: 10}
-  wallLeap: {x: 10, y: 10}
-  wallSlideSpeedMax: 3
-  wallStickTime: 0.25
+  wallJumpClimb: {x: 0, y: 0}
+  wallJumpOff: {x: 250, y: 150}
+  wallLeap: {x: 0, y: 0}
+  wallSlideSpeedMax: 30
+  wallStickTime: 0
+  weaponContainer: {fileID: 0}
+  weaponDistanceFromHolder: 0
 --- !u!1001 &1353481349856135107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -165,18 +167,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}

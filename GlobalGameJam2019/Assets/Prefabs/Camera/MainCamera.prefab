@@ -96,8 +96,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTag: Player
-  offset: {x: 0, y: 0, z: -50}
-  smoothTime: 0.5
-  minZoom: 40
-  maxZoom: 10
+  offset: {x: 0, y: 0, z: -375}
+  smoothTime: 0.25
+  minZoom: 50
+  maxZoom: 5
   zoomLimiter: 50
+  enableZooming: 1
