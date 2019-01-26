@@ -54,6 +54,7 @@ MonoBehaviour:
   - {fileID: 8815448896636477655}
   PhyiscalColliders:
   - {fileID: 5243944591021950431}
+  knockbackForce: 10
   isHeld: 0
 --- !u!61 &8815448896636477655
 BoxCollider2D:
@@ -68,7 +69,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.5792165, y: 0}
+  m_Offset: {x: -0.5555563, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -79,7 +80,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 12.138774, y: 1.5223322}
+  m_Size: {x: 12.592682, y: 1.5223322}
   m_EdgeRadius: 0
 --- !u!58 &7239036491082317076
 CircleCollider2D:
@@ -94,7 +95,7 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -6.48, y: 0}
+  m_Offset: {x: 6.81, y: 0}
   serializedVersion: 2
   m_Radius: 0.68
 --- !u!50 &1678118138441072146
@@ -210,6 +211,18 @@ PrefabInstance:
     - target: {fileID: 400002, guid: cfe26844eefc02f46b1e27fdebf88c6c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: cfe26844eefc02f46b1e27fdebf88c6c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: cfe26844eefc02f46b1e27fdebf88c6c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400002, guid: cfe26844eefc02f46b1e27fdebf88c6c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfe26844eefc02f46b1e27fdebf88c6c, type: 3}
