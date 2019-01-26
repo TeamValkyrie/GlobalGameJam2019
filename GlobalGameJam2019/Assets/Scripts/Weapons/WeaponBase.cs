@@ -38,4 +38,15 @@ public class WeaponBase : MonoBehaviour
             PhyiscalColliders[i].enabled = newState;
         }
     }
+
+    private void OnTrigger(Collider other)
+    {
+        if (other.transform.tag == "Weapon")
+        {
+            var weaponComponent = other.GetComponent<WeaponBase>();
+
+            print("Colliding with weapon");
+            //if(weaponComponent.isHeld)
+        }
+    }
 }
