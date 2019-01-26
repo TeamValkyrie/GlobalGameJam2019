@@ -16,6 +16,27 @@ ModelImporter:
     100020: pCylinder3
     100022: pSphere2
     100024: pSphere3
+    100026: node_id10
+    100028: node_id10 1
+    100030: node_id10 2
+    100032: node_id14
+    100034: node_id14 1
+    100036: node_id17
+    100038: node_id17 1
+    100040: node_id20
+    100042: node_id22
+    100044: node_id24
+    100046: node_id24 1
+    100048: node_id27
+    100050: node_id27 1
+    100052: node_id30
+    100054: node_id32
+    100056: node_id32 1
+    100058: node_id35
+    100060: node_id37
+    100062: node_id5
+    100064: node_id5 1
+    100066: node_id8
     400000: Body
     400002: //RootNode
     400004: Oor
@@ -29,11 +50,52 @@ ModelImporter:
     400020: pCylinder3
     400022: pSphere2
     400024: pSphere3
+    400026: node_id10
+    400028: node_id10 1
+    400030: node_id10 2
+    400032: node_id14
+    400034: node_id14 1
+    400036: node_id17
+    400038: node_id17 1
+    400040: node_id20
+    400042: node_id22
+    400044: node_id24
+    400046: node_id24 1
+    400048: node_id27
+    400050: node_id27 1
+    400052: node_id30
+    400054: node_id32
+    400056: node_id32 1
+    400058: node_id35
+    400060: node_id37
+    400062: node_id5
+    400064: node_id5 1
+    400066: node_id8
     2100000: m_b_l1
     2100002: m_b_l2
     2100004: m_b_d1
     2100006: m_nose
     2100008: m_eye
+    2100010: Material_47
+    2100012: Material_48
+    2100014: Material_49
+    2100016: Material_50
+    2100018: Material_51
+    2100020: Material_52
+    2100022: Material_53
+    2100024: Material_54
+    2100026: Material_55
+    2100028: Material_56
+    2100030: Material_103
+    2100032: Material_105
+    2100034: Material_59
+    2100036: Material_60
+    2100038: Material_61
+    2100040: Material_62
+    2100042: Material_63
+    2100044: Material_64
+    2100046: Material_65
+    2100048: Material_66
     2300000: Body
     2300002: Oor
     2300004: pasted__Oor
@@ -46,6 +108,26 @@ ModelImporter:
     2300018: pCylinder3
     2300020: pSphere2
     2300022: pSphere3
+    2300024: node_id10
+    2300026: node_id10 1
+    2300028: node_id10 2
+    2300030: node_id14
+    2300032: node_id14 1
+    2300034: node_id17
+    2300036: node_id17 1
+    2300038: node_id20
+    2300040: node_id22
+    2300042: node_id24
+    2300044: node_id24 1
+    2300046: node_id27
+    2300048: node_id27 1
+    2300050: node_id30
+    2300052: node_id32
+    2300054: node_id32 1
+    2300056: node_id35
+    2300058: node_id5
+    2300060: node_id5 1
+    2300062: node_id8
     3300000: Body
     3300002: Oor
     3300004: pasted__Oor
@@ -58,6 +140,26 @@ ModelImporter:
     3300018: pCylinder3
     3300020: pSphere2
     3300022: pSphere3
+    3300024: node_id10
+    3300026: node_id10 1
+    3300028: node_id10 2
+    3300030: node_id14
+    3300032: node_id14 1
+    3300034: node_id17
+    3300036: node_id17 1
+    3300038: node_id20
+    3300040: node_id22
+    3300042: node_id24
+    3300044: node_id24 1
+    3300046: node_id27
+    3300048: node_id27 1
+    3300050: node_id30
+    3300052: node_id32
+    3300054: node_id32 1
+    3300056: node_id35
+    3300058: node_id5
+    3300060: node_id5 1
+    3300062: node_id8
     4300000: pCylinder1
     4300002: pCylinder2
     4300004: Body
@@ -70,6 +172,26 @@ ModelImporter:
     4300018: pasted__pCylinder2
     4300020: pasted__pCylinder1
     4300022: pSphere3
+    4300024: node_id5
+    4300026: node_id5
+    4300028: node_id8
+    4300030: node_id10
+    4300032: node_id10
+    4300034: node_id10
+    4300036: node_id14
+    4300038: node_id14
+    4300040: node_id17
+    4300042: node_id17
+    4300044: node_id20
+    4300046: node_id22
+    4300048: node_id24
+    4300050: node_id24
+    4300052: node_id27
+    4300054: node_id27
+    4300056: node_id30
+    4300058: node_id32
+    4300060: node_id32
+    4300062: node_id35
   externalObjects: {}
   materials:
     importMaterials: 1
