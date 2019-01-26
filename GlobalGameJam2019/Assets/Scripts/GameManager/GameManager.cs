@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public enum GameState { NONE, SPAWNING, COUNTING, PLAYING };
 
     [HideInInspector]
+    public AudioManager audioManager;
+
+    [HideInInspector]
     public TimeManager timeManager;
 
     [HideInInspector]
@@ -37,6 +40,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();
         timeManager = FindObjectOfType<TimeManager>();
         canvasManager = FindObjectOfType<CanvasManager>();
         playerManager = FindObjectOfType<PlayerManager>();
@@ -73,6 +77,7 @@ public class GameManager : MonoBehaviour
         timeManager.currentCountdownTime = timeManager.countdownFrom;
         canvasManager.countDownPanel.SetActive(true);
         canvasManager.countDownText.text = timeManager.currentCountdownTime.ToString();
+        audioManager.PlaySound("Countdown");
 
         while (timeManager.currentCountdownTime > 0)
         {
