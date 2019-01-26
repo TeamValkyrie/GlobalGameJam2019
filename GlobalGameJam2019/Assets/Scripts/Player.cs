@@ -46,6 +46,11 @@ public class Player : MonoBehaviour
     [Header("Juice")]
     public ParticleSystem walkingParticle;
 
+    [Header("SoundFX")]
+    private float randomPitchMin = 0.9f;
+    private float randomPitchMax = 1.1f;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip[] jumpFX;
 
 
     private float gravity;
@@ -60,6 +65,7 @@ public class Player : MonoBehaviour
     { 
         controller = GetComponent<Controller2D>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
         //Setting up movement values
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
@@ -265,5 +271,23 @@ public class Player : MonoBehaviour
         weaponContainer.GetComponentInChildren<Rigidbody2D>().AddForce(force * weaponThrowForce);
 
         weaponContainer.transform.DetachChildren();
+    }
+
+    public void PlayJumpSoundFX()
+    {
+        PlaySound(jumpFX);
+    }
+
+    private void PlaySound(AudioClip sound)
+    {
+        audioSource.pitch = Random.Range(randomPitchMin, randomPitchMax);
+        audioSource.PlayOneShot(sound);
+    }
+
+    private void PlaySound(AudioClip[] sounds)
+    {
+        audioSource.pitch = Random.Range(randomPitchMin, randomPitchMax);
+        AudioClip soundToPlay = sounds[Random.Range(0, sounds.Length)];
+        audioSource.PlayOneShot(soundToPlay);
     }
 }
