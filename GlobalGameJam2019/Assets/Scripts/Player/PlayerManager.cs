@@ -47,9 +47,9 @@ public class PlayerManager : MonoBehaviour
         {
             int delta = polledControllers - connectedControllers;
 
-            for (int i = 0; i < delta; i++)
+            for (int i = 1; i < delta + 1; i++)
             {
-                SpawnPlayers(connectedControllers + delta);
+                SpawnPlayers(connectedControllers + i);
             }
 
             connectedControllers = polledControllers;

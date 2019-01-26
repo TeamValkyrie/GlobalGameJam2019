@@ -10,7 +10,9 @@ public class Player : MonoBehaviour
     [Header("Movement values")]
     public float accelerationTimeAir = .2f;
     public float accelerationTimeGround = .1f;
-    public float moveSpeed = 6;
+    public float movementSpeed = 6;
+    public Transform model;
+    public float modelRotationSpeed = 10.0f;
 
     [Header("Jump values")]
     public float timeToJumpApex = .4f;
@@ -34,23 +36,27 @@ public class Player : MonoBehaviour
     [Header("Weapon values")]
     public GameObject weaponContainer;
     public GameObject weaponCenterpoint;
+    public float weaponThrowForce = 10.0f;
     public float weaponDistanceFromHolder = 10.0f;
     public float weaponRotationSpeed = 10.0f;
     public float pickupRange = 10.0f;
     public string pickupTag = "Weapon";
     private bool isHoldingWeapon = false;
 
+
+
     private float gravity;
     private float jumpVelocity;
     private Vector3 velocity;
     private float velocityXSmoothing;
-
+    private Animator animator;
 
     private Controller2D controller;
 
     private void Start()
-    {
+    { 
         controller = GetComponent<Controller2D>();
+        animator = GetComponent<Animator>();
 
         //Setting up movement values
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
@@ -69,6 +75,11 @@ public class Player : MonoBehaviour
             else
                 FindClosestWeaponInRange();
         }
+
+        if(Input.GetAxis("Throw" + playerID) >= 0.8f && isHoldingWeapon)
+        {
+            ThrowWeapon();
+        }
     }
 
     private void UpdateMovement()
@@ -76,7 +87,21 @@ public class Player : MonoBehaviour
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"+playerID), Input.GetAxis("Vertical"+playerID));
         int wallDirX = (controller.collisions.left) ? -1 : 1;
 
-        float targetVelocityX = input.x * moveSpeed;
+        Vector3 moveDirection = new Vector3(input.x, 0.0f, 0.0f);
+        
+        if (Mathf.Abs(input.x) > 0.1f) //Right rotation animation
+        {
+            var newRoation = Quaternion.LookRotation(moveDirection);
+            model.transform.rotation = Quaternion.Slerp(model.transform.rotation, newRoation, modelRotationSpeed * Time.deltaTime);
+            animator.SetFloat("MovementSpeed", Mathf.Abs(input.x));
+        }
+        else
+        {
+            animator.SetFloat("MovementSpeed", 0);
+            
+        }
+
+        float targetVelocityX = input.x * movementSpeed;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing,
             (controller.collisions.below) ? accelerationTimeGround : accelerationTimeAir);
 
@@ -129,7 +154,7 @@ public class Player : MonoBehaviour
         if(Input.GetButton("Jump"+playerID))
         {
             bool walljumped = false;
-
+            
             if(wallSliding)
             {
                 walljumped = true;
@@ -158,6 +183,8 @@ public class Player : MonoBehaviour
                     jumpsRemaining++;
 
                 jumpsRemaining--;
+
+                animator.SetTrigger("Jump");
             }
         }
 
@@ -200,6 +227,8 @@ public class Player : MonoBehaviour
     {
         isHoldingWeapon = true;
         newWeapon.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        newWeapon.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        newWeapon.GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
         newWeapon.transform.parent = weaponContainer.transform;
         newWeapon.transform.localPosition = Vector3.zero;
         newWeapon.transform.localEulerAngles = newWeapon.transform.position - transform.position;
@@ -214,6 +243,23 @@ public class Player : MonoBehaviour
         weaponContainer.GetComponentInChildren<WeaponBase>().SetCombatCollidersActive(false);
         weaponContainer.GetComponentInChildren<WeaponBase>().SetPhysicalCollidersActive(true);
         weaponContainer.GetComponentInChildren<Rigidbody2D>().simulated = true;
+        weaponContainer.transform.DetachChildren();
+    }
+
+    private void ThrowWeapon()
+    {
+        isHoldingWeapon = false;
+        weaponContainer.GetComponentInChildren<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        weaponContainer.GetComponentInChildren<WeaponBase>().SetCombatCollidersActive(false);
+        weaponContainer.GetComponentInChildren<WeaponBase>().SetPhysicalCollidersActive(true);
+        weaponContainer.GetComponentInChildren<Rigidbody2D>().simulated = true;
+
+        Vector2 force = new Vector2();
+        force.x = weaponContainer.transform.position.x - transform.position.x;
+        force.y = weaponContainer.transform.position.y - transform.position.y;
+
+        weaponContainer.GetComponentInChildren<Rigidbody2D>().AddForce(force * weaponThrowForce);
+
         weaponContainer.transform.DetachChildren();
     }
 }
