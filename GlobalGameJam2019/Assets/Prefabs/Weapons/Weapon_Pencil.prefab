@@ -52,6 +52,9 @@ MonoBehaviour:
   - {fileID: 7239036491082317076}
   BlockColliders:
   - {fileID: 8815448896636477655}
+  PhyiscalColliders:
+  - {fileID: 5243944591021950431}
+  isHeld: 0
 --- !u!61 &8815448896636477655
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -204,11 +204,15 @@ public class Player : MonoBehaviour
         newWeapon.transform.parent = weaponContainer.transform;
         newWeapon.transform.localPosition = Vector3.zero;
         newWeapon.transform.localEulerAngles = newWeapon.transform.position - transform.position;
+        newWeapon.GetComponent<WeaponBase>().SetCombatCollidersActive(true);
+        newWeapon.GetComponent<WeaponBase>().SetPhysicalCollidersActive(false);
     }
 
     private void DropWeapon()
     {
         isHoldingWeapon = false;
+        weaponContainer.GetComponentInChildren<WeaponBase>().SetCombatCollidersActive(false);
+        weaponContainer.GetComponentInChildren<WeaponBase>().SetPhysicalCollidersActive(true);
         weaponContainer.GetComponentInChildren<Rigidbody2D>().simulated = true;
         weaponContainer.transform.DetachChildren();
     }
