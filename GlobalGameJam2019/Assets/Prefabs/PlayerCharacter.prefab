@@ -160,7 +160,7 @@ MonoBehaviour:
   accelerationTimeAir: 0.1
   accelerationTimeGround: 0.2
   moveSpeed: 235
-  timeToJumpApex: 0.25
+  timeToJumpApex: 0.4
   jumpHeight: 60
   numberOfJumps: 2
   extraJumpDecrease: 35
