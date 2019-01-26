@@ -46,7 +46,12 @@ public class PlayerManager : MonoBehaviour
         if (polledControllers > connectedControllers)
         {
             int delta = polledControllers - connectedControllers;
-            SpawnPlayers(delta);
+
+            for (int i = 0; i < delta; i++)
+            {
+                SpawnPlayers(connectedControllers + delta);
+            }
+
             connectedControllers = polledControllers;
             Debug.Log("Controlled connected!");
         }
@@ -57,14 +62,12 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void SpawnPlayers(int amount)
+    private void SpawnPlayers(int id)
     {
-        for (int i = 0; i < amount; i++)
-        {
-            int randomNumber = Random.Range(0, spawnPoints.Count);
-            GameObject newPlayer = Instantiate(playerPrefab, spawnPoints[randomNumber].position, Quaternion.identity);
-            playerCharacters.Add(newPlayer);
-            Debug.Log("Player spawned!");
-        }
+        int randomNumber = Random.Range(0, spawnPoints.Count);
+        GameObject newPlayer = Instantiate(playerPrefab, spawnPoints[randomNumber].position, Quaternion.identity);
+        playerCharacters.Add(newPlayer);
+        newPlayer.GetComponent<Player>().playerID = id;
+        Debug.Log("Player spawned!");
     }
 }
