@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 506375704}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WeaponContainer
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2106109389}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WeaponCenterPoint
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 277692164307966022}
   - component: {fileID: 9110940700058418187}
   - component: {fileID: 3121050572088074673}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PlayerCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -176,10 +176,9 @@ MonoBehaviour:
   weaponContainer: {fileID: 506375703}
   weaponCenterpoint: {fileID: 2106109388}
   weaponDistanceFromHolder: 10
-  weaponRoationSpeed: 1
-  TargetAngle: 0
-  CurrentAngle: 0
-  LerpResult: 0
+  weaponRotationSpeed: 10
+  pickupRange: 10
+  pickupTag: Weapon
 --- !u!1001 &1353481349856135107
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -190,6 +189,34 @@ PrefabInstance:
     - target: {fileID: 100000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
       propertyPath: m_Name
       value: FishKom
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
       propertyPath: m_LocalPosition.x

@@ -200,7 +200,7 @@ public class Player : MonoBehaviour
     private void PickupWeapon(GameObject newWeapon)
     {
         isHoldingWeapon = true;
-        newWeapon.GetComponent<Rigidbody2D>().simulated = false;
+        newWeapon.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
         newWeapon.transform.parent = weaponContainer.transform;
         newWeapon.transform.localPosition = Vector3.zero;
         newWeapon.transform.localEulerAngles = newWeapon.transform.position - transform.position;
@@ -211,6 +211,7 @@ public class Player : MonoBehaviour
     private void DropWeapon()
     {
         isHoldingWeapon = false;
+        weaponContainer.GetComponentInChildren<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         weaponContainer.GetComponentInChildren<WeaponBase>().SetCombatCollidersActive(false);
         weaponContainer.GetComponentInChildren<WeaponBase>().SetPhysicalCollidersActive(true);
         weaponContainer.GetComponentInChildren<Rigidbody2D>().simulated = true;
