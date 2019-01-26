@@ -7,5 +7,5 @@ using UnityEngine.UI;
 public class CharacterScriptableObject : ScriptableObject
 {
     public Sprite preview;
-    public string name;
+    public Sprite title;
 }

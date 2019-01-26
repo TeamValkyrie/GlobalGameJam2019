@@ -9,10 +9,9 @@ public class CharacterSelectionController : MonoBehaviour
     [System.Serializable]
     public struct PlayerUI
     {
-        public List<GameObject> targets;
         public Image preview;
-        public Text characterName;
-        public Color color;
+        public Image title;
+        public Text ready;
     }
 
     [SerializeField] private List<CharacterScriptableObject> characters;
@@ -30,7 +29,9 @@ public class CharacterSelectionController : MonoBehaviour
     public Sprite unknownCharacter;
 
     private PlayerManager playerManager;
-    private List<int> playerCharacterIndex;
+    private List<PlayerSelection> playerSelections;
+    private bool playersAreReady = false;
+    private int readyPlayers = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -41,26 +42,16 @@ public class CharacterSelectionController : MonoBehaviour
         }
 
         playerManager = FindObjectOfType<PlayerManager>();
-        playerCharacterIndex = new List<int>();
-        
+        playerSelections = new List<PlayerSelection>();
+
         foreach (PlayerUI playerUI in playerInterfaces)
         {
             playerUI.preview.sprite = unknownCharacter;
-            playerUI.characterName.text = "Unknown";
-            playerCharacterIndex.Add(0);
-
-            foreach (GameObject targetUI in playerUI.targets)
-            {
-                if (targetUI.GetComponent<Image>())
-                {
-                    targetUI.GetComponent<Image>().color = Color.grey;
-                }
-
-                if (targetUI.GetComponent<Text>())
-                {
-                    targetUI.GetComponent<Text>().color = Color.grey;
-                }
-            }
+            playerUI.title.sprite = unknownCharacter;
+            PlayerSelection playerSelection = new PlayerSelection();
+            playerSelection.characterIndex = 0;
+            playerSelection.isReady = false;
+            playerSelections.Add(playerSelection);
         }
     }
 
@@ -69,50 +60,60 @@ public class CharacterSelectionController : MonoBehaviour
     {
         if (Input.GetButton("Submit"))
         {
-            CurrentHeldBCancelTime += Time.deltaTime;
-
-            float percentage = CurrentHeldBCancelTime / RequiredHeldCancelTime;
-
-            startIndicator.GetComponent<Image>().fillAmount = percentage;
-
-            if (CurrentHeldBCancelTime >= RequiredHeldCancelTime)
+            if (playersAreReady)
             {
-                SceneManager.LoadScene(StartupSceneName);
+                CurrentHeldBCancelTime += Time.deltaTime;
+
+                float percentage = CurrentHeldBCancelTime / RequiredHeldCancelTime;
+
+                startIndicator.GetComponent<Image>().fillAmount = percentage;
+
+                if (CurrentHeldBCancelTime >= RequiredHeldCancelTime)
+                {
+                    SceneManager.LoadScene(StartupSceneName);
+                }
             }
         }
         else
         {
             CurrentHeldBCancelTime = 0.0f;
+
+            if (startIndicator.GetComponent<Image>().fillAmount > 0.0f)
+            {
+                startIndicator.GetComponent<Image>().fillAmount -= Time.deltaTime;
+            }
         }
 
         for (int i = 0; i < playerManager.GetConnectedPlayers(); i++)
         {
-            foreach (GameObject targetUI in playerInterfaces[i].targets)
-            {
-                if (targetUI.GetComponent<Image>())
-                {
-                    targetUI.GetComponent<Image>().color = playerInterfaces[i].color;
-                }
-
-                if (targetUI.GetComponent<Text>())
-                {
-                    targetUI.GetComponent<Text>().color = playerInterfaces[i].color;
-                }
-            }
-
-            if (Input.GetAxis("Horizontal" + (i + 1)) > 0)
+            if (Input.GetButtonUp("RB" + (i + 1)))
             {
                 SelectNextCharacter(i);
             }
-            else if (Input.GetAxis("Horizontal" + (i + 1)) < 0)
+            else if (Input.GetButtonUp("LB" + (i + 1)))
             {
                 SelectPreviousCharacter(i);
             }
 
-            Image preview = playerInterfaces[i].preview;
-            Text name = playerInterfaces[i].characterName;
-            preview.sprite = characters[playerCharacterIndex[i]].preview;
-            name.text = characters[playerCharacterIndex[i]].name;
+            if (Input.GetButtonUp("Submit" + (i + 1)))
+            {
+                playerSelections[i].isReady = true;
+
+                if (playerSelections[i].isReady)
+                {
+                    readyPlayers++;
+
+                    foreach (PlayerUI target in playerInterfaces)
+                    {
+                        target.ready.gameObject.SetActive(true);
+                    }
+                }
+
+                if (readyPlayers == playerManager.GetConnectedPlayers())
+                {
+                    playersAreReady = true;
+                }
+            }
         }
 
         if (playerManager.GetConnectedPlayers() > 0)
@@ -137,19 +138,19 @@ public class CharacterSelectionController : MonoBehaviour
     private void SelectNextCharacter(int playerIndex)
     {
         Image preview = playerInterfaces[playerIndex].preview;
-        Text name = playerInterfaces[playerIndex].characterName;
+        Image title = playerInterfaces[playerIndex].title;
 
-        if (playerCharacterIndex[playerIndex] >= characters.Count - 1)
+        if (playerSelections[playerIndex].characterIndex >= characters.Count - 1)
         {
-            playerCharacterIndex[playerIndex] = 0;
+            playerSelections[playerIndex].characterIndex = 0;
         }
         else
         {
-            playerCharacterIndex[playerIndex]++;
+            playerSelections[playerIndex].characterIndex++;
         }
 
-        preview.sprite = characters[playerCharacterIndex[playerIndex]].preview;
-        name.text = characters[playerCharacterIndex[playerIndex]].name;
+        preview.sprite = characters[playerSelections[playerIndex].characterIndex].preview;
+        title.sprite = characters[playerSelections[playerIndex].characterIndex].title;
 
         Debug.Log("Player " + playerIndex + " selected the next character");
     }
@@ -157,19 +158,19 @@ public class CharacterSelectionController : MonoBehaviour
     private void SelectPreviousCharacter(int playerIndex)
     {
         Image preview = playerInterfaces[playerIndex].preview;
-        Text name = playerInterfaces[playerIndex].characterName;
+        Image title = playerInterfaces[playerIndex].title;
 
-        if (playerCharacterIndex[playerIndex] <= 0)
+        if (playerSelections[playerIndex].characterIndex <= 0)
         {
-            playerCharacterIndex[playerIndex] = characters.Count - 1;
+            playerSelections[playerIndex].characterIndex = characters.Count - 1;
         }
         else
         {
-            playerCharacterIndex[playerIndex]--;
+            playerSelections[playerIndex].characterIndex--;
         }
 
-        preview.sprite = characters[playerCharacterIndex[playerIndex]].preview;
-        name.text = characters[playerCharacterIndex[playerIndex]].name;
+        preview.sprite = characters[playerSelections[playerIndex].characterIndex].preview;
+        title.sprite = characters[playerSelections[playerIndex].characterIndex].title;
 
         Debug.Log("Player " + playerIndex + " selected the previous character");
     }
