@@ -199,13 +199,17 @@ public class Player : MonoBehaviour
 
     private void PickupWeapon(GameObject newWeapon)
     {
-        newWeapon.transform.parent = weaponContainer.transform;
         isHoldingWeapon = true;
+        newWeapon.GetComponent<Rigidbody2D>().simulated = false;
+        newWeapon.transform.parent = weaponContainer.transform;
+        newWeapon.transform.localPosition = Vector3.zero;
+        newWeapon.transform.localEulerAngles = newWeapon.transform.position - transform.position;
     }
 
     private void DropWeapon()
     {
         isHoldingWeapon = false;
+        weaponContainer.GetComponentInChildren<Rigidbody2D>().simulated = true;
         weaponContainer.transform.DetachChildren();
     }
 }
