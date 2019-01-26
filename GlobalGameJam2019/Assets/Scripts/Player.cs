@@ -37,12 +37,14 @@ public class Player : MonoBehaviour
     public GameObject weaponContainer;
     public GameObject weaponCenterpoint;
     public float weaponThrowForce = 2000.0f;
-
     public float weaponDistanceFromHolder = 10.0f;
     public float weaponRotationSpeed = 10.0f;
     public float pickupRange = 10.0f;
     public string pickupTag = "Weapon";
     private bool isHoldingWeapon = false;
+
+    [Header("Juice")]
+    public ParticleSystem walkingParticle;
 
 
 
@@ -68,7 +70,7 @@ public class Player : MonoBehaviour
     {
        UpdateMovement();
        UpdateWeaponDirection();
-
+                                             
         if (Input.GetButtonDown("PickUp"+playerID))
         {
             if(isHoldingWeapon)
@@ -85,6 +87,9 @@ public class Player : MonoBehaviour
 
     private void UpdateMovement()
     {
+        walkingParticle.Play();
+
+
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"+playerID), Input.GetAxis("Vertical"+playerID));
         int wallDirX = (controller.collisions.left) ? -1 : 1;
 
@@ -95,6 +100,7 @@ public class Player : MonoBehaviour
             var newRoation = Quaternion.LookRotation(moveDirection);
             model.transform.rotation = Quaternion.Slerp(model.transform.rotation, newRoation, modelRotationSpeed * Time.deltaTime);
             animator.SetFloat("MovementSpeed", Mathf.Abs(input.x));
+
         }
         else
         {
