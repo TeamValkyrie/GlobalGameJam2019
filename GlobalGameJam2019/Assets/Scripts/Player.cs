@@ -87,9 +87,6 @@ public class Player : MonoBehaviour
 
     private void UpdateMovement()
     {
-        walkingParticle.Play();
-
-
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"+playerID), Input.GetAxis("Vertical"+playerID));
         int wallDirX = (controller.collisions.left) ? -1 : 1;
 
