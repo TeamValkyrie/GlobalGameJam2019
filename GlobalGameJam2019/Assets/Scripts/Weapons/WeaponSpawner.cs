@@ -27,7 +27,7 @@ public class WeaponSpawner : MonoBehaviour
         {
             if (numberOfWeapons < MaxWeapons)
             {
-                SpawnAtRandomSpawnPoint(WeaponPrefabs[Random.Range(0, WeaponPrefabs.Length - 1)]);
+                SpawnAtRandomSpawnPoint(WeaponPrefabs[Random.Range(0, WeaponPrefabs.Length)]);
             }
             spawnDelay = 1.0f;
         }
@@ -37,7 +37,7 @@ public class WeaponSpawner : MonoBehaviour
     {
         if (SpawnPoints.Length > 0)
         {
-            Transform SpawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length - 1)];
+            Transform SpawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
             Instantiate(WeaponPrefab, SpawnPoint);
             numberOfWeapons++;
         }
