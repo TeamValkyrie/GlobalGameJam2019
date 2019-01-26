@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Experimental.PlayerLoop;
 
 [RequireComponent(typeof(Controller2D))]
 public class Player : MonoBehaviour
@@ -32,7 +33,9 @@ public class Player : MonoBehaviour
     
     [Header("Weapon values")]
     public GameObject weaponContainer;
-    public float weaponDistanceFromHolder;
+    public GameObject weaponCenterpoint;
+    public float weaponDistanceFromHolder = 10.0f;
+    public float weaponRotationSpeed = 10.0f;
     private bool isHoldingWeapon = false;
 
     private float gravity;
@@ -50,11 +53,6 @@ public class Player : MonoBehaviour
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
         print("Gravity: " + gravity + "  Jump Velocity: " + jumpVelocity);
-
-        //Instantiating the weapon holder
-        weaponContainer = GameObject.Instantiate(new GameObject("WeaponHolder: " + playerID),transform.position, Quaternion.identity);
-        weaponContainer.transform.parent = gameObject.transform;
-
     }
 
     private void FixedUpdate()
@@ -160,6 +158,17 @@ public class Player : MonoBehaviour
     private void UpdateWeaponDirection()
     {
         Vector2 input = new Vector2(Input.GetAxisRaw("WeaponHorizontal"), Input.GetAxisRaw("WeaponVertical"));
+        if (input.x > 0.1f || input.y > 0.1f || input.x < -0.1f || input.y < -0.1f)
+        {
+            float TargetAngle = (Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg * -1.0f) + 90.0f;
+            float CurrentAngle = weaponCenterpoint.transform.rotation.eulerAngles.z;
+
+            float LerpResult = Mathf.LerpAngle(CurrentAngle, TargetAngle, Time.deltaTime * weaponRotationSpeed);
+
+            Vector3 weaponRotation = weaponCenterpoint.transform.eulerAngles;
+            weaponRotation.z = LerpResult;
+            weaponCenterpoint.transform.eulerAngles = weaponRotation;
+        }
 
     }
 
