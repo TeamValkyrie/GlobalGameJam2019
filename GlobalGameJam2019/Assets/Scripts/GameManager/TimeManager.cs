@@ -17,8 +17,6 @@ public class TimeManager : MonoBehaviour
     public int countdownFrom;
     public int currentCountdownTime;
 
-
-
     // Start is called before the first frame update
     void Start()
     {

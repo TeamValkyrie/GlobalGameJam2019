@@ -1783,11 +1783,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Background
       objectReference: {fileID: 0}
-    - target: {fileID: 5873647092637224880, guid: 61af6f8b495f22a4984e7b4581e38292,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5873647092637224882, guid: 61af6f8b495f22a4984e7b4581e38292,
         type: 3}
       propertyPath: m_LocalPosition.x
