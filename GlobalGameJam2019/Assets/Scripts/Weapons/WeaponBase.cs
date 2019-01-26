@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WeaponBase : MonoBehaviour
 {
@@ -10,6 +8,7 @@ public class WeaponBase : MonoBehaviour
     [SerializeField] private Collider2D[] PhyiscalColliders;
 
     [Header("Weapon properties")]
+    public float knockbackForce = 10.0f;
     public bool isHeld = false;
 
     private void Start()
@@ -39,12 +38,13 @@ public class WeaponBase : MonoBehaviour
         }
     }
 
-    private void OnTrigger(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.transform.tag == "Weapon")
         {
             var weaponComponent = other.GetComponent<WeaponBase>();
 
+            weaponComponent.GetComponent<Rigidbody2D>().AddForce((weaponComponent.gameObject.transform.position - transform.position) * knockbackForce, ForceMode2D.Impulse);
             print("Colliding with weapon");
             //if(weaponComponent.isHeld)
         }
