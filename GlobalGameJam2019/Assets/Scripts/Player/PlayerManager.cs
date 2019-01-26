@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
 
     public static PlayerManager instance;
 
-    private List<GameObject> playerCharacters = new List<GameObject>();
+    public List<GameObject> playerCharacters = new List<GameObject>();
     private CameraController cameraController;
 
     // Awake is always called before any Start functions
@@ -75,7 +75,7 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    private void SpawnPlayers(int id)
+    public void SpawnPlayer(int id)
     {
         int randomNumber = Random.Range(0, spawnPoints.Count);
         GameObject newPlayer = Instantiate(playerPrefab, spawnPoints[randomNumber].position, Quaternion.identity);
