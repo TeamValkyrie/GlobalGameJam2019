@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 277692164307966022}
   - component: {fileID: 9110940700058418187}
   - component: {fileID: 3121050572088074673}
+  - component: {fileID: 452669534}
   m_Layer: 10
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -156,7 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5601a7edb7aab4fa7ddbc1e573f38d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 2
+  playerID: 1
   accelerationTimeAir: 0.1
   accelerationTimeGround: 0.2
   movementSpeed: 235
@@ -177,10 +178,30 @@ MonoBehaviour:
   wallStickTime: 0
   weaponContainer: {fileID: 506375703}
   weaponCenterpoint: {fileID: 2106109388}
+  weaponThrowForce: 10
   weaponDistanceFromHolder: 10
   weaponRotationSpeed: 10
   pickupRange: 10
   pickupTag: Weapon
+--- !u!95 &452669534
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353481349862023599}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c481f8cd5051d7c419110911ab5919fc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &1353481349856135107
 PrefabInstance:
   m_ObjectHideFlags: 0
