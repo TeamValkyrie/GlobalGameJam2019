@@ -11,12 +11,11 @@ public class CharacterSelectionController : MonoBehaviour
     {
         public Image preview;
         public Image title;
-        public Text ready;
+        public Image ready;
     }
 
     [SerializeField] private List<CharacterScriptableObject> characters;
-
-    [SerializeField] private string StartupSceneName;
+    
     [SerializeField] private float RequiredHeldCancelTime;
     [SerializeField] private float CurrentHeldBCancelTime;
 
@@ -36,11 +35,6 @@ public class CharacterSelectionController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(StartupSceneName == "")
-        {
-            Debug.Log("[WARNING] - [CharacterSelectionController] - StartupSceneName not assiged");
-        }
-
         playerManager = FindObjectOfType<PlayerManager>();
         playerSelections = new List<PlayerSelection>();
 
@@ -49,7 +43,7 @@ public class CharacterSelectionController : MonoBehaviour
             playerUI.preview.sprite = unknownCharacter;
             playerUI.title.sprite = unknownCharacter;
             PlayerSelection playerSelection = new PlayerSelection();
-            playerSelection.characterIndex = 0;
+            playerSelection.characterIndex = -1;
             playerSelection.isReady = false;
             playerSelections.Add(playerSelection);
         }
@@ -70,7 +64,7 @@ public class CharacterSelectionController : MonoBehaviour
 
                 if (CurrentHeldBCancelTime >= RequiredHeldCancelTime)
                 {
-                    SceneManager.LoadScene(StartupSceneName);
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 }
             }
         }
@@ -86,32 +80,45 @@ public class CharacterSelectionController : MonoBehaviour
 
         for (int i = 0; i < playerManager.GetConnectedPlayers(); i++)
         {
-            if (Input.GetButtonUp("RB" + (i + 1)))
+            if (!playersAreReady)
             {
-                SelectNextCharacter(i);
-            }
-            else if (Input.GetButtonUp("LB" + (i + 1)))
-            {
-                SelectPreviousCharacter(i);
+                if (Input.GetButtonUp("RB" + (i + 1)))
+                {
+                    SelectNextCharacter(i);
+                }
+                else if (Input.GetButtonUp("LB" + (i + 1)))
+                {
+                    SelectPreviousCharacter(i);
+                }
             }
 
             if (Input.GetButtonUp("Submit" + (i + 1)))
             {
-                playerSelections[i].isReady = true;
-
-                if (playerSelections[i].isReady)
+                if (playerSelections[i].characterIndex != -1)
                 {
-                    readyPlayers++;
+                    playerSelections[i].isReady = true;
 
-                    foreach (PlayerUI target in playerInterfaces)
+                    if (playerSelections[i].isReady)
                     {
-                        target.ready.gameObject.SetActive(true);
+                        readyPlayers++;
+                        playerInterfaces[i].ready.gameObject.SetActive(true);
+                    }
+
+                    if (readyPlayers == playerManager.GetConnectedPlayers())
+                    {
+                        playersAreReady = true;
                     }
                 }
+            }
 
-                if (readyPlayers == playerManager.GetConnectedPlayers())
+            if (Input.GetButtonUp("Cancel" + (i + 1)))
+            {
+                if (playerSelections[i].isReady)
                 {
-                    playersAreReady = true;
+                    readyPlayers--;
+                    playerSelections[i].isReady = false;
+                    playerInterfaces[i].ready.gameObject.SetActive(false);
+                    playersAreReady = false;
                 }
             }
         }
