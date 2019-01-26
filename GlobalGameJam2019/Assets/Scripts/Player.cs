@@ -34,11 +34,14 @@ public class Player : MonoBehaviour
     [Header("Weapon values")]
     public GameObject weaponContainer;
     public GameObject weaponCenterpoint;
+    public float weaponThrowForce = 10.0f;
     public float weaponDistanceFromHolder = 10.0f;
     public float weaponRotationSpeed = 10.0f;
     public float pickupRange = 10.0f;
     public string pickupTag = "Weapon";
     private bool isHoldingWeapon = false;
+
+
 
     private float gravity;
     private float jumpVelocity;
@@ -68,6 +71,11 @@ public class Player : MonoBehaviour
                 DropWeapon();
             else
                 FindClosestWeaponInRange();
+        }
+
+        if(Input.GetAxis("Throw" + playerID) >= 0.8f && isHoldingWeapon)
+        {
+            ThrowWeapon();
         }
     }
 
@@ -200,6 +208,8 @@ public class Player : MonoBehaviour
     {
         isHoldingWeapon = true;
         newWeapon.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+        newWeapon.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        newWeapon.GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
         newWeapon.transform.parent = weaponContainer.transform;
         newWeapon.transform.localPosition = Vector3.zero;
         newWeapon.transform.localEulerAngles = newWeapon.transform.position - transform.position;
@@ -214,6 +224,23 @@ public class Player : MonoBehaviour
         weaponContainer.GetComponentInChildren<WeaponBase>().SetCombatCollidersActive(false);
         weaponContainer.GetComponentInChildren<WeaponBase>().SetPhysicalCollidersActive(true);
         weaponContainer.GetComponentInChildren<Rigidbody2D>().simulated = true;
+        weaponContainer.transform.DetachChildren();
+    }
+
+    private void ThrowWeapon()
+    {
+        isHoldingWeapon = false;
+        weaponContainer.GetComponentInChildren<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        weaponContainer.GetComponentInChildren<WeaponBase>().SetCombatCollidersActive(false);
+        weaponContainer.GetComponentInChildren<WeaponBase>().SetPhysicalCollidersActive(true);
+        weaponContainer.GetComponentInChildren<Rigidbody2D>().simulated = true;
+
+        Vector2 force = new Vector2();
+        force.x = weaponContainer.transform.position.x - transform.position.x;
+        force.y = weaponContainer.transform.position.y - transform.position.y;
+
+        weaponContainer.GetComponentInChildren<Rigidbody2D>().AddForce(force * weaponThrowForce);
+
         weaponContainer.transform.DetachChildren();
     }
 }
