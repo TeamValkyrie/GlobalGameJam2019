@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 {
     public int playerID;
 
+    public bool isDead = false;
+
     [Header("Movement values")]
     public float accelerationTimeAir = .2f;
     public float accelerationTimeGround = .1f;
@@ -52,6 +54,9 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip[] jumpFX;
 
+    private bool isBeingKnockBacked;
+    [SerializeField] private float knockbacktime = 0.2f;
+    [SerializeField] private float knockbacktimeleft = 0.2f;
 
     private float gravity;
     private float jumpVelocity;
@@ -74,20 +79,35 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-       UpdateMovement();
-       UpdateWeaponDirection();
-                                             
-        if (Input.GetButtonDown("PickUp"+playerID))
+        if (isBeingKnockBacked)
         {
-            if(isHoldingWeapon)
-                DropWeapon();
-            else
-                FindClosestWeaponInRange();
+            knockbacktimeleft -= Time.deltaTime;
+            if(knockbacktimeleft <= 0.0f)
+            {
+                GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                GetComponent<Rigidbody2D>().angularVelocity = 0.0f;
+                isBeingKnockBacked = false;
+            }
         }
 
-        if(Input.GetAxis("Throw" + playerID) >= 0.8f && isHoldingWeapon)
+        if (!isDead)
         {
-            ThrowWeapon();
+            UpdateMovement();
+            UpdateWeaponDirection();
+
+            if (Input.GetButtonDown("PickUp" + playerID))
+            {
+                if (isHoldingWeapon)
+                    DropWeapon();
+                else
+                    FindClosestWeaponInRange();
+            }
+
+            if (Input.GetAxis("Throw" + playerID) >= 0.8f && isHoldingWeapon)
+            {
+                ThrowWeapon();
+            }
         }
     }
 
@@ -244,6 +264,8 @@ public class Player : MonoBehaviour
         newWeapon.transform.localEulerAngles = newWeapon.transform.position - transform.position;
         newWeapon.GetComponent<WeaponBase>().SetCombatCollidersActive(true);
         newWeapon.GetComponent<WeaponBase>().SetPhysicalCollidersActive(false);
+        newWeapon.GetComponent<WeaponBase>().carrier = this;
+        newWeapon.GetComponent<WeaponBase>().isHeld = true;
     }
 
     private void DropWeapon()
@@ -252,6 +274,8 @@ public class Player : MonoBehaviour
         weaponContainer.GetComponentInChildren<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         weaponContainer.GetComponentInChildren<WeaponBase>().SetCombatCollidersActive(false);
         weaponContainer.GetComponentInChildren<WeaponBase>().SetPhysicalCollidersActive(true);
+        weaponContainer.GetComponentInChildren<WeaponBase>().carrier = null;
+        weaponContainer.GetComponentInChildren<WeaponBase>().isHeld = false;
         weaponContainer.GetComponentInChildren<Rigidbody2D>().simulated = true;
         weaponContainer.transform.DetachChildren();
     }
@@ -262,6 +286,8 @@ public class Player : MonoBehaviour
         weaponContainer.GetComponentInChildren<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         weaponContainer.GetComponentInChildren<WeaponBase>().SetCombatCollidersActive(false);
         weaponContainer.GetComponentInChildren<WeaponBase>().SetPhysicalCollidersActive(true);
+        weaponContainer.GetComponentInChildren<WeaponBase>().carrier = null;
+        weaponContainer.GetComponentInChildren<WeaponBase>().isHeld = false;
         weaponContainer.GetComponentInChildren<Rigidbody2D>().simulated = true;
 
         Vector2 force = new Vector2();
@@ -290,4 +316,31 @@ public class Player : MonoBehaviour
         AudioClip soundToPlay = sounds[Random.Range(0, sounds.Length)];
         audioSource.PlayOneShot(soundToPlay);
     }
+    public void KnockBackPlayer(float KnockBackForce)
+    {
+        Vector2 force = new Vector2();
+        force.x = weaponContainer.transform.position.x - transform.position.x;
+        force.y = weaponContainer.transform.position.y - transform.position.y;
+        force = -force;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        GetComponent<Rigidbody2D>().AddForce(force * KnockBackForce);
+        knockbacktimeleft = knockbacktime;
+        isBeingKnockBacked = true;
+    }
+
+    public void KillPlayer()
+    {
+        if (isHoldingWeapon)
+        {
+            DropWeapon();
+        }
+        isDead = true;
+        Debug.Log("Player with ID: " + playerID + " died");  
+    }
+
+    public void ResetPlayer()
+    {
+        isDead = false;
+    }
+
 }

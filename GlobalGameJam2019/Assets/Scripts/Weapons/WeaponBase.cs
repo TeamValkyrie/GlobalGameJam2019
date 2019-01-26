@@ -10,6 +10,7 @@ public class WeaponBase : MonoBehaviour
     [Header("Weapon properties")]
     public float knockbackForce = 10.0f;
     public bool isHeld = false;
+    public Player carrier;
 
     private void Start()
     {
@@ -43,10 +44,20 @@ public class WeaponBase : MonoBehaviour
         if (other.transform.tag == "Weapon")
         {
             var weaponComponent = other.GetComponent<WeaponBase>();
+            if(isHeld && weaponComponent.isHeld)
+            {
+                carrier.KnockBackPlayer(knockbackForce);
+                weaponComponent.carrier.KnockBackPlayer(knockbackForce);
+                return;
+            }
+        }
 
-            weaponComponent.GetComponent<Rigidbody2D>().AddForce((weaponComponent.gameObject.transform.position - transform.position) * knockbackForce, ForceMode2D.Impulse);
-            print("Colliding with weapon");
-            //if(weaponComponent.isHeld)
+        if (other.transform.tag == "Player" && other.gameObject != carrier.gameObject)
+        {
+            if (!other.GetComponentInParent<Player>().isDead)
+            {
+                other.GetComponentInParent<Player>().KillPlayer();
+            }
         }
     }
 }
