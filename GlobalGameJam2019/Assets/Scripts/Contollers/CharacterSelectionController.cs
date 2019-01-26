@@ -14,7 +14,7 @@ public class CharacterSelectionController : MonoBehaviour
         public Image ready;
     }
 
-    [SerializeField] private List<CharacterScriptableObject> characters;
+   public List<CharacterScriptableObject> characters;
     
     [SerializeField] private float RequiredHeldCancelTime;
     [SerializeField] private float CurrentHeldBCancelTime;
@@ -65,6 +65,17 @@ public class CharacterSelectionController : MonoBehaviour
 
                 if (CurrentHeldBCancelTime >= RequiredHeldCancelTime)
                 {
+                    List<string> finalSelections = new List<string>(playerSelections.Count);
+
+                    foreach (PlayerSelection selection in playerSelections)
+                    {
+                        if (selection.characterIndex != -1)
+                        {
+                            finalSelections.Add(characters[selection.characterIndex].name);
+                        }
+                    }
+
+                    playerManager.SetPlayers(finalSelections);
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 }
             }
@@ -156,7 +167,7 @@ public class CharacterSelectionController : MonoBehaviour
         {
             playerSelections[playerIndex].characterIndex++;
         }
-
+        
         preview.sprite = characters[playerSelections[playerIndex].characterIndex].preview;
         title.sprite = characters[playerSelections[playerIndex].characterIndex].title;
 

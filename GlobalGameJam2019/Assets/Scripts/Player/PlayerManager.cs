@@ -13,25 +13,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private List<Transform> spawnPoints;
 
-    public static PlayerManager instance;
-
     public List<GameObject> playerCharacters = new List<GameObject>();
     private CameraController cameraController;
-
-    // Awake is always called before any Start functions
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        DontDestroyOnLoad(gameObject);
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -74,8 +57,13 @@ public class PlayerManager : MonoBehaviour
             Debug.Log("Controlled disconnected!");
         }
     }
+    
+    public void SetPlayers(List<string> playerSelections)
+    {
+        // Check for names like "Catto"
+    }
 
-    public void SpawnPlayer(int id)
+    private void SpawnPlayer(int id)
     {
         int randomNumber = Random.Range(0, spawnPoints.Count);
         GameObject newPlayer = Instantiate(playerPrefab, spawnPoints[randomNumber].position, Quaternion.identity);
