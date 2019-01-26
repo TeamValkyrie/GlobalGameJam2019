@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
     public GameObject weaponContainer;
     public GameObject weaponCenterpoint;
     public float weaponThrowForce = 2000.0f;
+
     public float weaponDistanceFromHolder = 10.0f;
     public float weaponRotationSpeed = 10.0f;
     public float pickupRange = 10.0f;
