@@ -49,7 +49,7 @@ public class PlayerManager : MonoBehaviour
 
             for (int i = 0; i < delta; i++)
             {
-                SpawnPlayers(connectedControllers + delta);
+                SpawnPlayers(connectedControllers + i);
             }
 
             connectedControllers = polledControllers;
