@@ -1,10 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Countdown : MonoBehaviour
+public class TimeManager : MonoBehaviour
 {
+    [Header("Game")]
+    public float elapsedTime;
+
+    [Header("Countdown")]
+    public int countdownFrom;
+    public int currentCountdownTime;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +20,6 @@ public class Countdown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 }
