@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
 
-    [HideInInspector]
-    public enum GameState { NONE, SPAWNING, COUNTING, PLAYING, PAUSED, OPTIONS };
+    [System.Serializable]
+    public enum GameState { NONE, SPAWNING, COUNTING, PLAYING, PAUSED, OPTIONS, ENDGAME };
 
     [HideInInspector]
     public AudioManager audioManager;
@@ -30,6 +31,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private string BattleMusicName;
 
+    [SerializeField]
+    private float PlayTimer;
 
     //Awake is always called before any Start functions
     void Awake()
@@ -73,14 +76,6 @@ public class GameManager : MonoBehaviour
                 SetGameState(GameState.PAUSED);
             }
         }
-
-        if (Input.GetButtonUp("Submit"))
-        {
-            if (gameState == GameState.PAUSED)
-            {
-                SetGameState(GameState.OPTIONS);
-            }
-        }
     }
 
     public void SetGameState(GameState state)
@@ -113,6 +108,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void EndGame()
+    {
+        Debug.Log("End Game Triggered!");
+        SetGameState(GameState.ENDGAME);
+    }
+
     private IEnumerator StartCountdown()
     {
         timeManager.currentCountdownTime = timeManager.countdownFrom;
@@ -133,4 +134,49 @@ public class GameManager : MonoBehaviour
         canvasManager.countDownPanel.SetActive(false);
         SetGameState(GameState.PLAYING);
     }
+
+    public void LoadScene(string name)
+    {
+        SceneManager.LoadScene(SceneManager.GetSceneByName(name).buildIndex);
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+         Application.Quit();
+#endif
+    }
+
+    public void OnResume()
+    {
+        SetGameState(GameState.PLAYING);
+    }
+
+    public void OnOptions()
+    {
+        SetGameState(GameState.OPTIONS);
+    }
+
+    public void MainVolumeSliderChange()
+    {
+        audioManager.SetMasterVolume(canvasManager.masterSlider.value);
+    }
+
+    public void MusicVolumeSliderChange()
+    {
+        audioManager.SetMusicVolume(canvasManager.musicSlider.value);
+    }
+
+    public void SFXVolumeSliderChange()
+    {
+        audioManager.SetSoundEffectsVolume(canvasManager.sfxSlider.value);
+    }
+
+    public GameState GetGameState()
+    {
+        return gameState;
+    }
+
 }

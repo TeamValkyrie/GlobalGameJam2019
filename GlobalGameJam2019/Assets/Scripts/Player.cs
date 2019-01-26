@@ -55,7 +55,6 @@ public class Player : MonoBehaviour
         //Setting up movement values
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
-        print("Gravity: " + gravity + "  Jump Velocity: " + jumpVelocity);
     }
 
     private void FixedUpdate()
@@ -63,7 +62,7 @@ public class Player : MonoBehaviour
        UpdateMovement();
        UpdateWeaponDirection();
 
-        if (Input.GetButtonDown("PickUp"))
+        if (Input.GetButtonDown("PickUp"+playerID))
         {
             if(isHoldingWeapon)
                 DropWeapon();
@@ -74,7 +73,7 @@ public class Player : MonoBehaviour
 
     private void UpdateMovement()
     {
-        Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        Vector2 input = new Vector2(Input.GetAxis("Horizontal"+playerID), Input.GetAxis("Vertical"+playerID));
         int wallDirX = (controller.collisions.left) ? -1 : 1;
 
         float targetVelocityX = input.x * moveSpeed;
@@ -127,7 +126,7 @@ public class Player : MonoBehaviour
         }
 
 
-        if(Input.GetButton("Jump"))
+        if(Input.GetButton("Jump"+playerID))
         {
             bool walljumped = false;
 
@@ -168,7 +167,7 @@ public class Player : MonoBehaviour
 
     private void UpdateWeaponDirection()
     {
-        Vector2 input = new Vector2(Input.GetAxisRaw("WeaponHorizontal"), Input.GetAxisRaw("WeaponVertical"));
+        Vector2 input = new Vector2(Input.GetAxisRaw("WeaponHorizontal" + playerID), Input.GetAxisRaw("WeaponVertical" + playerID));
         if (input.x > 0.1f || input.y > 0.1f || input.x < -0.1f || input.y < -0.1f)
         {
             float TargetAngle = (Mathf.Atan2(input.x, input.y) * Mathf.Rad2Deg * -1.0f) + 90.0f;

@@ -41,16 +41,7 @@ public class StartupController : MonoBehaviour
 
         if (Input.GetButtonUp("Cancel"))
         {
-            optionsCanvas.SetActive(!optionsCanvas.activeInHierarchy);
-
-            if (optionsCanvas.activeInHierarchy)
-            {
-                eventSystem.SetSelectedGameObject(masterSlider.gameObject);
-            }
-            else
-            {
-                eventSystem.SetSelectedGameObject(eventSystem.firstSelectedGameObject);
-            }
+            OnOptions();
         }
     }
 
@@ -92,5 +83,19 @@ public class StartupController : MonoBehaviour
     public void SFXVolumeSliderChange()
     {
         audioManager.SetSoundEffectsVolume(sfxSlider.value);
+    }
+
+    public void OnOptions()
+    {
+        optionsCanvas.SetActive(!optionsCanvas.activeInHierarchy);
+
+        if (optionsCanvas.activeInHierarchy)
+        {
+            eventSystem.SetSelectedGameObject(masterSlider.gameObject);
+        }
+        else
+        {
+            eventSystem.SetSelectedGameObject(eventSystem.firstSelectedGameObject);
+        }
     }
 }
