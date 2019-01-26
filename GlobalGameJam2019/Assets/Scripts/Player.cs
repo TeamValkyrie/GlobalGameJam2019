@@ -44,7 +44,6 @@ public class Player : MonoBehaviour
     public float pickupRange = 10.0f;
     public string pickupTag = "Weapon";
     private bool isHoldingWeapon = false;
-<<<<<<< Updated upstream
 
     [Header("Juice")]
     public ParticleSystem walkingParticle;
@@ -55,11 +54,9 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip[] jumpFX;
 
-=======
     private bool isBeingKnockBacked;
     [SerializeField] private float knockbacktime = 0.2f;
     [SerializeField] private float knockbacktimeleft = 0.2f;
->>>>>>> Stashed changes
 
     private float gravity;
     private float jumpVelocity;
@@ -302,7 +299,6 @@ public class Player : MonoBehaviour
         weaponContainer.transform.DetachChildren();
     }
 
-<<<<<<< Updated upstream
     public void PlayJumpSoundFX()
     {
         PlaySound(jumpFX);
@@ -320,7 +316,6 @@ public class Player : MonoBehaviour
         AudioClip soundToPlay = sounds[Random.Range(0, sounds.Length)];
         audioSource.PlayOneShot(soundToPlay);
     }
-=======
     public void KnockBackPlayer(float KnockBackForce)
     {
         Vector2 force = new Vector2();
@@ -348,5 +343,4 @@ public class Player : MonoBehaviour
         isDead = false;
     }
 
->>>>>>> Stashed changes
 }
