@@ -36,12 +36,15 @@ public class Player : MonoBehaviour
     public GameObject weaponCenterpoint;
     public float weaponDistanceFromHolder = 10.0f;
     public float weaponRotationSpeed = 10.0f;
+    public float pickupRange = 10.0f;
+    public string pickupTag = "Weapon";
     private bool isHoldingWeapon = false;
 
     private float gravity;
     private float jumpVelocity;
     private Vector3 velocity;
     private float velocityXSmoothing;
+
 
     private Controller2D controller;
 
@@ -59,6 +62,14 @@ public class Player : MonoBehaviour
     {
        UpdateMovement();
        UpdateWeaponDirection();
+
+        if (Input.GetButtonDown("PickUp"))
+        {
+            if(isHoldingWeapon)
+                DropWeapon();
+            else
+                FindClosestWeaponInRange();
+        }
     }
 
     private void UpdateMovement()
@@ -174,16 +185,27 @@ public class Player : MonoBehaviour
 
     private void FindClosestWeaponInRange()
     {
-        
+        Collider2D[] foundObjects = Physics2D.OverlapCircleAll(transform.position, pickupRange);
+
+        for (int i = 0; i < foundObjects.Length; i++)
+        {
+            if (foundObjects[i].gameObject.tag == pickupTag)
+            {
+                PickupWeapon(foundObjects[i].gameObject);
+                break;
+            }
+        }
     }
 
-    private void PickupWeapon()
+    private void PickupWeapon(GameObject newWeapon)
     {
-        
+        newWeapon.transform.parent = weaponContainer.transform;
+        isHoldingWeapon = true;
     }
 
     private void DropWeapon()
     {
-        
+        isHoldingWeapon = false;
+        weaponContainer.transform.DetachChildren();
     }
 }
