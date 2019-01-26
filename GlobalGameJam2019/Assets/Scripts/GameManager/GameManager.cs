@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -34,6 +35,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private float PlayTimer;
 
+    [SerializeField]
+    private GameObject EndGamePanel;
+
+    [SerializeField]
+    private List<int> Scores;
+
     //Awake is always called before any Start functions
     void Awake()
     {
@@ -55,7 +62,9 @@ public class GameManager : MonoBehaviour
         canvasManager = FindObjectOfType<CanvasManager>();
         playerManager = FindObjectOfType<PlayerManager>();
 
-        SetGameState(GameState.COUNTING);
+        Scores = new List<int>(playerManager.GetConnectedPlayers());
+
+        SetGameState(GameState.SPAWNING);
     }
 
     // Update is called once per frame
@@ -85,6 +94,7 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.SPAWNING:
+                SpawnPlayers();
                 break;
             case GameState.COUNTING:
                 StartCoroutine(StartCountdown());
@@ -108,9 +118,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void SpawnPlayers()
+    {
+        foreach(GameObject player in playerManager.playerCharacters)
+        {
+            playerManager.SpawnPlayer(player.GetComponent<Player>().playerID);
+        }
+    }
+
     public void EndGame()
     {
         Debug.Log("End Game Triggered!");
+
+        audioManager.StopMusic(BattleMusicName);
+        EndGamePanel.SetActive(true);
+
+        GrandPoints();
+
         SetGameState(GameState.ENDGAME);
     }
 
@@ -178,5 +202,18 @@ public class GameManager : MonoBehaviour
     {
         return gameState;
     }
+
+    private void GrandPoints()
+    {
+        //All players that are alive at the end of a round are rewarded with a point!
+        foreach(GameObject player in playerManager.playerCharacters)
+        {
+            if (!player.GetComponent<Player>().isDead)
+            {
+                Scores[player.GetComponent<Player>().playerID]++;
+            }
+        }
+    }
+
 
 }
