@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8861a39ab275e1c4782a275bd5a6794a, type: 3}
-  m_Name: Fishkom
+  m_Name: Konine
   m_EditorClassIdentifier: 
   preview: {fileID: 21300000, guid: eb9bd9f3717b8aa45a4ae9683c9e8c05, type: 3}
-  name: Fishkom
+  title: {fileID: 21300000, guid: 11258335a1d22e54cb1618cb367e233b, type: 3}
