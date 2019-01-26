@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     [HideInInspector]
-    public enum GameState { NONE, SPAWNING, COUNTING, PLAYING };
+    public enum GameState { NONE, SPAWNING, COUNTING, PLAYING, PAUSED, OPTIONS };
 
     [HideInInspector]
     public AudioManager audioManager;
@@ -58,7 +58,29 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonUp("Cancel"))
+        {
+            if (gameState == GameState.PLAYING)
+            {
+                SetGameState(GameState.PAUSED);
+            }
+            else if (gameState == GameState.PAUSED)
+            {
+                SetGameState(GameState.PLAYING);
+            }
+            else if (gameState == GameState.OPTIONS)
+            {
+                SetGameState(GameState.PAUSED);
+            }
+        }
 
+        if (Input.GetButtonUp("Submit"))
+        {
+            if (gameState == GameState.PAUSED)
+            {
+                SetGameState(GameState.OPTIONS);
+            }
+        }
     }
 
     public void SetGameState(GameState state)
@@ -73,7 +95,18 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(StartCountdown());
                 break;
             case GameState.PLAYING:
-                audioManager.PlayMusic("BattleMusic");
+                canvasManager.ToggleOptions(false);
+                canvasManager.TogglePause(false);
+                audioManager.PlayMusic(BattleMusicName);
+                break;
+            case GameState.PAUSED:
+                canvasManager.ToggleOptions(false);
+                canvasManager.TogglePause(true);
+                audioManager.PauseMusic(BattleMusicName);
+                break;
+            case GameState.OPTIONS:
+                canvasManager.ToggleOptions(true);
+                canvasManager.TogglePause(false);
                 break;
             default:
                 break;
