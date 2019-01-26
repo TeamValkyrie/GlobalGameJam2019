@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 301878029}
   - component: {fileID: 301878028}
   m_Layer: 5
-  m_Name: Text_character
+  m_Name: Text_character2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2205,7 +2205,7 @@ GameObject:
   - component: {fileID: 1545248131}
   - component: {fileID: 1545248130}
   m_Layer: 5
-  m_Name: Text_character
+  m_Name: Text_character1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2596,33 +2596,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed65126efe67c1047b22d93fa9ea829a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characters:
+  - {fileID: 11400000, guid: d19a6de67ba3d0b43a8ac8281bf63a92, type: 2}
+  - {fileID: 11400000, guid: d19a6de67ba3d0b43a8ac8281bf63a92, type: 2}
   StartupSceneName: Startup_Scene
   RequiredHeldCancelTime: 2
   CurrentHeldBCancelTime: 0
-  PlayerInterfaces:
+  playerInterfaces:
   - targets:
     - {fileID: 800696722}
     - {fileID: 861154115}
     - {fileID: 778892938}
-    color: {r: 1, g: 0.98039216, b: 0, a: 1}
+    preview: {fileID: 1565478587}
+    characterName: {fileID: 1545248130}
+    color: {r: 1, g: 0.9753064, b: 0, a: 1}
   - targets:
     - {fileID: 1983258487}
     - {fileID: 954784346}
     - {fileID: 1674730916}
-    color: {r: 0.13159503, g: 0.9811321, b: 0, a: 1}
+    preview: {fileID: 1587889055}
+    characterName: {fileID: 301878028}
+    color: {r: 0.20301843, g: 1, b: 0, a: 1}
   - targets:
     - {fileID: 2121042157}
     - {fileID: 1523642373}
     - {fileID: 1250114163}
-    color: {r: 0, g: 1, b: 0.85158634, a: 1}
+    preview: {fileID: 2032383355}
+    characterName: {fileID: 753510937}
+    color: {r: 0, g: 1, b: 0.91636705, a: 1}
   - targets:
     - {fileID: 1976128240}
     - {fileID: 1385588968}
     - {fileID: 869546772}
-    color: {r: 1, g: 0, b: 0.63447714, a: 1}
+    preview: {fileID: 194598646}
+    characterName: {fileID: 842693226}
+    color: {r: 1, g: 0, b: 0.67145586, a: 1}
   joinPanel: {fileID: 1283519463}
   startPanel: {fileID: 499817992}
   startIndicator: {fileID: 147407953}
+  unknownCharacter: {fileID: 21300000, guid: 7de774adfc88d8649b35b20164f0acce, type: 3}
 --- !u!4 &1574127092
 Transform:
   m_ObjectHideFlags: 0
