@@ -156,10 +156,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c5601a7edb7aab4fa7ddbc1e573f38d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerID: 0
+  playerID: 2
   accelerationTimeAir: 0.1
   accelerationTimeGround: 0.2
-  moveSpeed: 235
+  movementSpeed: 235
+  model: {fileID: 1353481349856271683}
+  modelRotationSpeed: 10
   timeToJumpApex: 0.25
   jumpHeight: 60
   numberOfJumps: 2
@@ -224,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
       propertyPath: m_LocalRotation.z
@@ -232,7 +234,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
       propertyPath: m_RootOrder
@@ -244,7 +246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

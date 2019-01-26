@@ -10,7 +10,9 @@ public class Player : MonoBehaviour
     [Header("Movement values")]
     public float accelerationTimeAir = .2f;
     public float accelerationTimeGround = .1f;
-    public float moveSpeed = 6;
+    public float movementSpeed = 6;
+    public Transform model;
+    public float modelRotationSpeed = 10.0f;
 
     [Header("Jump values")]
     public float timeToJumpApex = .4f;
@@ -47,13 +49,14 @@ public class Player : MonoBehaviour
     private float jumpVelocity;
     private Vector3 velocity;
     private float velocityXSmoothing;
-
+    private Animator animator;
 
     private Controller2D controller;
 
     private void Start()
-    {
+    { 
         controller = GetComponent<Controller2D>();
+        animator = GetComponent<Animator>();
 
         //Setting up movement values
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
@@ -84,7 +87,21 @@ public class Player : MonoBehaviour
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"+playerID), Input.GetAxis("Vertical"+playerID));
         int wallDirX = (controller.collisions.left) ? -1 : 1;
 
-        float targetVelocityX = input.x * moveSpeed;
+        Vector3 moveDirection = new Vector3(input.x, 0.0f, 0.0f);
+        
+        if (Mathf.Abs(input.x) > 0.1f) //Right rotation animation
+        {
+            var newRoation = Quaternion.LookRotation(moveDirection);
+            model.transform.rotation = Quaternion.Slerp(model.transform.rotation, newRoation, modelRotationSpeed * Time.deltaTime);
+            animator.SetFloat("MovementSpeed", Mathf.Abs(input.x));
+        }
+        else
+        {
+            animator.SetFloat("MovementSpeed", 0);
+            
+        }
+
+        float targetVelocityX = input.x * movementSpeed;
         velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing,
             (controller.collisions.below) ? accelerationTimeGround : accelerationTimeAir);
 
@@ -137,7 +154,7 @@ public class Player : MonoBehaviour
         if(Input.GetButton("Jump"+playerID))
         {
             bool walljumped = false;
-
+            
             if(wallSliding)
             {
                 walljumped = true;
@@ -166,6 +183,8 @@ public class Player : MonoBehaviour
                     jumpsRemaining++;
 
                 jumpsRemaining--;
+
+                animator.SetTrigger("Jump");
             }
         }
 
