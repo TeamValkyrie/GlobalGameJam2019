@@ -24,6 +24,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameState gameState = GameState.NONE;
 
+    [SerializeField]
+    private string MenuMusicName;
+
+    [SerializeField]
+    private string BattleMusicName;
+
+
     //Awake is always called before any Start functions
     void Awake()
     {
@@ -46,6 +53,8 @@ public class GameManager : MonoBehaviour
         playerManager = FindObjectOfType<PlayerManager>();
 
         SetGameState(GameState.COUNTING);
+
+        StartMusic();
     }
 
     // Update is called once per frame
@@ -91,5 +100,31 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         canvasManager.countDownPanel.SetActive(false);
         SetGameState(GameState.PLAYING);
+    }
+
+    private void StartMusic()
+    {
+
+        if (BattleMusicName != "" && MenuMusicName != "")
+        {
+            switch (gameState)
+            {
+                case GameState.PLAYING:
+                    {
+                        audioManager.PlayMusic(BattleMusicName);
+                        break;
+                    }
+                case GameState.NONE:
+                case GameState.SPAWNING:
+                    {
+                        audioManager.PlayMusic(MenuMusicName);
+                        break;
+                    }
+            }
+        }
+        else
+        {
+            Debug.Log("[WARNING] - [GameManager] - Missing Audio name for either BattleMusic or MenuMusic");
+        }
     }
 }
