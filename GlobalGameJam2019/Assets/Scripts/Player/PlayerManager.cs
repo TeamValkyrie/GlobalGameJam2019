@@ -12,12 +12,32 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField]
     private List<Transform> spawnPoints;
-    
+
+    public static PlayerManager instance;
+
     private List<GameObject> playerCharacters = new List<GameObject>();
- 
+    private CameraController cameraController;
+
+    // Awake is always called before any Start functions
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(gameObject);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        cameraController = FindObjectOfType<CameraController>();
+
         PollControllers();
     }
 
@@ -45,13 +65,6 @@ public class PlayerManager : MonoBehaviour
 
         if (polledControllers > connectedControllers)
         {
-            int delta = polledControllers - connectedControllers;
-
-            for (int i = 1; i < delta + 1; i++)
-            {
-                SpawnPlayers(connectedControllers + i);
-            }
-
             connectedControllers = polledControllers;
             Debug.Log("Controlled connected!");
         }
@@ -69,5 +82,11 @@ public class PlayerManager : MonoBehaviour
         playerCharacters.Add(newPlayer);
         newPlayer.GetComponent<Player>().playerID = id;
         Debug.Log("Player spawned!");
+        cameraController.FindTargets();
+    }
+
+    public int GetConnectedPlayers()
+    {
+        return connectedControllers;
     }
 }

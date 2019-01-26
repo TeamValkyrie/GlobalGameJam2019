@@ -73,7 +73,7 @@ public class CameraController : MonoBehaviour
     }
 
     // Attempt to find targets with the right tag
-    private void FindTargets()
+    public void FindTargets()
     {
         GameObject[] foundTargets = GameObject.FindGameObjectsWithTag(targetTag);
 
