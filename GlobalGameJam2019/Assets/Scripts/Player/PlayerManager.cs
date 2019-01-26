@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
     private List<Transform> spawnPoints;
     
     private List<GameObject> playerCharacters = new List<GameObject>();
-
+ 
     // Start is called before the first frame update
     void Start()
     {

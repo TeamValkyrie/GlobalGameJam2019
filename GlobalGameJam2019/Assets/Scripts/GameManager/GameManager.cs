@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
 
     [System.Serializable]
-    public enum GameState { NONE, SPAWNING, COUNTING, PLAYING, PAUSED, OPTIONS };
+    public enum GameState { NONE, SPAWNING, COUNTING, PLAYING, PAUSED, OPTIONS, ENDGAME };
 
     [HideInInspector]
     public AudioManager audioManager;
@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private string BattleMusicName;
 
+    [SerializeField]
+    private float PlayTimer;
 
     //Awake is always called before any Start functions
     void Awake()
@@ -106,6 +108,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void EndGame()
+    {
+        Debug.Log("End Game Triggered!");
+        SetGameState(GameState.ENDGAME);
+    }
+
     private IEnumerator StartCountdown()
     {
         timeManager.currentCountdownTime = timeManager.countdownFrom;
@@ -165,4 +173,10 @@ public class GameManager : MonoBehaviour
     {
         audioManager.SetSoundEffectsVolume(canvasManager.sfxSlider.value);
     }
+
+    public GameState GetGameState()
+    {
+        return gameState;
+    }
+
 }

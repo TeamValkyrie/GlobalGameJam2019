@@ -370,6 +370,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elapsedTime: 0
+  MatchTime: 60
+  gameManager: {fileID: 1720192189}
   countdownFrom: 3
   currentCountdownTime: 0
 --- !u!1 &347582278
@@ -2931,6 +2933,7 @@ MonoBehaviour:
   gameState: 0
   MenuMusicName: MenuMusic
   BattleMusicName: BattleMusic
+  PlayTimer: 0
 --- !u!1 &1853346575
 GameObject:
   m_ObjectHideFlags: 0
