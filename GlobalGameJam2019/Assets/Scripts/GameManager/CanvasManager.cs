@@ -13,6 +13,7 @@ public class CanvasManager : MonoBehaviour
 
     [Header("Paused")]
     [SerializeField] private GameObject pausedPanel;
+    public Button resumeButton;
 
     [Header("Options")]
     [SerializeField] private GameObject optionsCanvas;
@@ -61,5 +62,14 @@ public class CanvasManager : MonoBehaviour
     public void TogglePause(bool active = false)
     {
         pausedPanel.SetActive(active);
+
+        if (pausedPanel.activeInHierarchy)
+        {
+            eventSystem.SetSelectedGameObject(resumeButton.gameObject);
+        }
+        else
+        {
+            eventSystem.SetSelectedGameObject(eventSystem.firstSelectedGameObject);
+        }
     }
 }
