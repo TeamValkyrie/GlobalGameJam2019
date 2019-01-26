@@ -70,6 +70,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        CheckForEndGame();
+
         if (Input.GetButtonUp("Cancel"))
         {
             if (gameState == GameState.PLAYING)
@@ -84,6 +87,23 @@ public class GameManager : MonoBehaviour
             {
                 SetGameState(GameState.PAUSED);
             }
+        }
+    }
+
+    private void CheckForEndGame()
+    {
+        int alivecount = 0;
+       foreach(GameObject player in playerManager.playerCharacters)
+        {
+            if (!player.GetComponent<Player>().isDead)
+            {
+                alivecount++;
+            }
+        }
+
+       if(alivecount <= 1)
+        {
+            EndGame();
         }
     }
 
