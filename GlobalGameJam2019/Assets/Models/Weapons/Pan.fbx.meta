@@ -1,26 +1,16 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: cfe26844eefc02f46b1e27fdebf88c6c
-=======
-guid: edc277d03fe0f4043b2ecec4cae8d2e1
->>>>>>> feat_PlayerControlls
+guid: 0a1eed204721c6949b88d87c4e685c97
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: pCylinder1
-    100002: //RootNode
-    100004: pointLight1
-    400000: pCylinder1
-    400002: //RootNode
-    400004: pointLight1
-    2100000: m_YellowShavedBase
+    100000: //RootNode
+    400000: //RootNode
+    2100000: m_KeiDonkerRood
     2100002: m_Point
-    2100004: m_Eraser
-    2100006: m_MetalEnd
-    2100008: m_YellowPencil
-    2300000: pCylinder1
-    3300000: pCylinder1
-    4300000: pCylinder1
+    2100004: lambert9
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: pCylinder2
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -72,11 +62,7 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-<<<<<<< HEAD
-    useFileScale: 0
-=======
     useFileScale: 1
->>>>>>> feat_PlayerControlls
     previousCalculatedGlobalScale: 1
     hasPreviousCalculatedGlobalScale: 0
   tangentSpace:
