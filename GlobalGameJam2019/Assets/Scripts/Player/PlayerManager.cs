@@ -14,7 +14,24 @@ public class PlayerManager : MonoBehaviour
     private List<Transform> spawnPoints;
 
     public List<GameObject> playerCharacters = new List<GameObject>();
+
+    [SerializeField] List<string> playerNames;
     private CameraController cameraController;
+
+    private static PlayerManager instance;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(this);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -60,16 +77,18 @@ public class PlayerManager : MonoBehaviour
     
     public void SetPlayers(List<string> playerSelections)
     {
-        // Check for names like "Catto"
+        playerNames = playerSelections;
     }
 
-    private void SpawnPlayer(int id)
+    public void SpawnPlayer(int id)
     {
         int randomNumber = Random.Range(0, spawnPoints.Count);
-        GameObject newPlayer = Instantiate(playerPrefab, spawnPoints[randomNumber].position, Quaternion.identity);
+        GameObject newPlayer = Instantiate(playerPrefab, new Vector2(50.0f,50.0f), Quaternion.identity);
+        newPlayer.GetComponent<Player>().SetModel(playerNames[id]);
         playerCharacters.Add(newPlayer);
-        newPlayer.GetComponent<Player>().playerID = id;
+        newPlayer.GetComponent<Player>().playerID = id + 1;
         Debug.Log("Player spawned!");
+        cameraController = FindObjectOfType<CameraController>();
         cameraController.FindTargets();
     }
 

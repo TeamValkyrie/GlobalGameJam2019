@@ -1,23 +1,60 @@
 fileFormatVersion: 2
-guid: aca88812bb0662148b6a1c57f207e3b0
+guid: a0eb2e2c089991a4795ac11424540a34
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: pCube1
-    100002: pCube2
-    100004: //RootNode
-    400000: pCube1
-    400002: pCube2
-    400004: //RootNode
-    2100000: m_Handle
-    2100002: m_Accent
-    2100004: m_Borstel
-    2300000: pCube1
-    2300002: pCube2
-    3300000: pCube1
-    3300002: pCube2
-    4300000: pCube1
-    4300002: pCube2
+    100000: //RootNode
+    100002: group
+    100004: group1
+    100006: group2
+    100008: pasted__group
+    100010: pasted__group1
+    100012: pasted__pasted__group1
+    100014: pasted__pasted__pCube5
+    100016: pasted__pasted__pCube6
+    100018: pasted__pCube5
+    100020: pasted__pCube6
+    100022: pCube4
+    100024: pCube5
+    100026: pCube6
+    400000: //RootNode
+    400002: group
+    400004: group1
+    400006: group2
+    400008: pasted__group
+    400010: pasted__group1
+    400012: pasted__pasted__group1
+    400014: pasted__pasted__pCube5
+    400016: pasted__pasted__pCube6
+    400018: pasted__pCube5
+    400020: pasted__pCube6
+    400022: pCube4
+    400024: pCube5
+    400026: pCube6
+    2100000: m_t
+    2100002: pasted__m_t
+    2100004: m_Gray
+    2300000: pasted__pasted__pCube5
+    2300002: pasted__pasted__pCube6
+    2300004: pasted__pCube5
+    2300006: pasted__pCube6
+    2300008: pCube4
+    2300010: pCube5
+    2300012: pCube6
+    3300000: pasted__pasted__pCube5
+    3300002: pasted__pasted__pCube6
+    3300004: pasted__pCube5
+    3300006: pasted__pCube6
+    3300008: pCube4
+    3300010: pCube5
+    3300012: pCube6
+    4300000: pCube4
+    4300002: pCube5
+    4300004: pCube6
+    4300006: pasted__pCube5
+    4300008: pasted__pCube6
+    4300010: pasted__pasted__pCube5
+    4300012: pasted__pasted__pCube6
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -49,7 +86,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 100
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1

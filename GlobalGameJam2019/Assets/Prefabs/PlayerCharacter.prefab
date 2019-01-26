@@ -228,6 +228,10 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 99a4d87912e893c4fb660b88280e2816, type: 3}
   knockbacktime: 0.2
   knockbacktimeleft: 0.2
+  FishKom: {fileID: 5034355450036722298}
+  Catto: {fileID: 2991206247192953875}
+  Chick: {fileID: 6255590807860148971}
+  Konine: {fileID: 3225250503173592893}
 --- !u!95 &452669534
 Animator:
   serializedVersion: 3
@@ -438,6 +442,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7405a0e4d4187ae4d80f0a7cec2ce2b3, type: 3}
+--- !u!1 &2991206247192953875 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 7405a0e4d4187ae4d80f0a7cec2ce2b3,
+    type: 3}
+  m_PrefabInstance: {fileID: 2991206247192855219}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2991206247192729651 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 7405a0e4d4187ae4d80f0a7cec2ce2b3,
@@ -451,14 +461,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2169522984132604184}
     m_Modifications:
-    - target: {fileID: 100002, guid: ce021028394eb9141b5459bbc5d8af21, type: 3}
-      propertyPath: m_Name
-      value: Konine
-      objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: ce021028394eb9141b5459bbc5d8af21, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: ce021028394eb9141b5459bbc5d8af21, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.11
@@ -515,8 +517,22 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: ce021028394eb9141b5459bbc5d8af21, type: 3}
+      propertyPath: m_Name
+      value: Konine
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: ce021028394eb9141b5459bbc5d8af21, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ce021028394eb9141b5459bbc5d8af21, type: 3}
+--- !u!1 &3225250503173592893 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: ce021028394eb9141b5459bbc5d8af21,
+    type: 3}
+  m_PrefabInstance: {fileID: 3225250503173493151}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3225250503173098269 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: ce021028394eb9141b5459bbc5d8af21,
@@ -530,14 +546,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2169522984132604184}
     m_Modifications:
-    - target: {fileID: 100000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
-      propertyPath: m_Name
-      value: FishKom
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -582,8 +590,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
+      propertyPath: m_Name
+      value: FishKom
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd9afc89e89e92d4c85169d62bf2eea5, type: 3}
+--- !u!1 &5034355450036722298 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: fd9afc89e89e92d4c85169d62bf2eea5,
+    type: 3}
+  m_PrefabInstance: {fileID: 5034355450036624602}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5034355450036487770 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: fd9afc89e89e92d4c85169d62bf2eea5,
@@ -663,6 +685,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b36bc5bbb88b8940bd3caa08750d1c4, type: 3}
+--- !u!1 &6255590807860148971 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 4b36bc5bbb88b8940bd3caa08750d1c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6255590807860051019}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6255590807860176587 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 4b36bc5bbb88b8940bd3caa08750d1c4,

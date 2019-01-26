@@ -66,15 +66,49 @@ public class Player : MonoBehaviour
 
     private Controller2D controller;
 
+    [SerializeField] GameObject FishKom;
+    [SerializeField] GameObject Catto;
+    [SerializeField] GameObject Chick;
+    [SerializeField] GameObject Konine;
+
     private void Start()
     { 
         controller = GetComponent<Controller2D>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-
-        //Setting up movement values
         gravity = -(2 * jumpHeight) / Mathf.Pow(timeToJumpApex, 2);
         jumpVelocity = Mathf.Abs(gravity) * timeToJumpApex;
+    }
+
+    public void SetModel(string name)
+    {
+        switch (name)
+        {
+            case "Chick":
+                FishKom.active = false;
+                Catto.active = false;
+                Chick.active = true;
+                Konine.active = false;
+                break;
+            case "Konine":
+                FishKom.active = false;
+                Catto.active = false;
+                Chick.active = false;
+                Konine.active = true;
+                break;
+            case "Fishy":
+                FishKom.active = true;
+                Catto.active = false;
+                Chick.active = false;
+                Konine.active = false;
+                break;
+            case "Catto":
+                FishKom.active = false;
+                Catto.active = true;
+                Chick.active = false;
+                Konine.active = false;
+                break;
+        }
     }
 
     private void FixedUpdate()

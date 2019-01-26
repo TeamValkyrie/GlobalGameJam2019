@@ -1,23 +1,14 @@
 fileFormatVersion: 2
-guid: aca88812bb0662148b6a1c57f207e3b0
+guid: be043bb2d36bbcf4f8a14a6b4c522a08
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: pCube1
-    100002: pCube2
-    100004: //RootNode
-    400000: pCube1
-    400002: pCube2
-    400004: //RootNode
-    2100000: m_Handle
-    2100002: m_Accent
-    2100004: m_Borstel
-    2300000: pCube1
-    2300002: pCube2
-    3300000: pCube1
-    3300002: pCube2
+    100000: //RootNode
+    400000: //RootNode
+    2100000: kwwlkejflka
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: pCube1
-    4300002: pCube2
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -49,7 +40,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 100
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1

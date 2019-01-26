@@ -33,8 +33,6 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(gameObject);
-
         for (int i = 0; i < music.Length; i++)
         {
             GameObject audioObject = new GameObject("Music_" + i + "_" + music[i].audioName);
