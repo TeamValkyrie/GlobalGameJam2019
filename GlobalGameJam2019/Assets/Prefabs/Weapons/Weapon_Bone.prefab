@@ -56,7 +56,7 @@ MonoBehaviour:
   BlockColliders:
   - {fileID: 8815448896636477655}
   PhyiscalColliders:
-  - {fileID: 5243944591021950431}
+  - {fileID: 8815448896636477655}
   knockbackForce: 200
   isHeld: 0
   carrier: {fileID: 0}
@@ -92,7 +92,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 21.426502, y: 7.8569317}
+  m_Size: {x: 20.76, y: 10.1}
   m_EdgeRadius: 0
 --- !u!58 &7239036491082317076
 CircleCollider2D:
@@ -155,7 +155,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 21.44565, y: 7.90112}
+  m_Size: {x: 20.76, y: 10.1}
   m_EdgeRadius: 0
 --- !u!61 &8245640749081496508
 BoxCollider2D:
@@ -181,7 +181,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 21.457113, y: 7.856882}
+  m_Size: {x: 20.76, y: 10.1}
   m_EdgeRadius: 0
 --- !u!82 &463783509761337096
 AudioSource:

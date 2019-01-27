@@ -195,6 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 1
   isDead: 0
+  isFrozen: 0
   accelerationTimeAir: 0.1
   accelerationTimeGround: 0.2
   movementSpeed: 235
@@ -220,6 +221,7 @@ MonoBehaviour:
   weaponRotationSpeed: 10
   pickupRange: 20
   pickupTag: Weapon
+  TauntCooldown: 2
   jumpFX:
   - {fileID: 8300000, guid: e7a00867a23d5094ab2a597cd8f7ac94, type: 3}
   - {fileID: 8300000, guid: 6ad91375b51fc4f4da85bde8a167eb73, type: 3}

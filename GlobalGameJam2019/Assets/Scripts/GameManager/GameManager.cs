@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -23,6 +22,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public PlayerManager playerManager;
 
+    [HideInInspector]
+    public CameraController cameraController;
+
     [SerializeField]
     private GameState gameState = GameState.NONE;
 
@@ -42,10 +44,10 @@ public class GameManager : MonoBehaviour
     private List<int> Scores;
 
     [SerializeField]
-    private Text[] ScoreTexts;
-
-    [SerializeField]
     string[] levelNames;
+
+    [SerializeField] private GameObject pointPopup;
+    [SerializeField] private AudioClip pointSound;
 
     [SerializeField] float EndGameTimer = 5.0f;
     float EndGameTimerCurrent;
@@ -71,6 +73,7 @@ public class GameManager : MonoBehaviour
         timeManager = FindObjectOfType<TimeManager>();
         canvasManager = FindObjectOfType<CanvasManager>();
         playerManager = FindObjectOfType<PlayerManager>();
+        cameraController = FindObjectOfType<CameraController>();
 
         Scores = new List<int>();
         Scores.Add(0);
@@ -147,6 +150,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.COUNTING:
                 playerManager.FreezePlayerMovement();
+                //cameraController.PreviewPlayer(timeManager.countdownFrom);
                 StartCoroutine(StartCountdown());
                 break;
             case GameState.PLAYING:
@@ -185,9 +189,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("End Game Triggered!");
 
         audioManager.StopMusic(BattleMusicName);
-        audioManager.PlaySound("EndGame");
         EndGamePanel.SetActive(true);
-        timeManager.matchTimePanel.SetActive(false);
+
         GrandPoints();
 
         SetGameState(GameState.ENDGAME);
@@ -266,11 +269,10 @@ public class GameManager : MonoBehaviour
             if (!player.GetComponent<Player>().isDead)
             {
                 Scores[player.GetComponent<Player>().playerID-1]++;
+                GameObject.Instantiate(pointPopup, player.transform.position, Quaternion.identity, player.transform);
             }
         }
-        for(int i = 0; i < Scores.Count; i++)
-        {
-            ScoreTexts[i].text = "Player" + (i + 1) + ":" + Scores[i];
-        }
     }
+
+
 }
