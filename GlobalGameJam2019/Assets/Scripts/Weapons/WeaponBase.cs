@@ -13,6 +13,9 @@ public class WeaponBase : MonoBehaviour
     public Player carrier;
     public bool isFlying = false;
 
+    [Header("Effects")]
+    [SerializeField] private GameObject collisonSparkEffect;
+
     private void Start()
     {
         SetCombatCollidersActive(false);
@@ -60,6 +63,10 @@ public class WeaponBase : MonoBehaviour
             {
                 carrier.KnockBackPlayer(knockbackForce);
                 weaponComponent.carrier.KnockBackPlayer(knockbackForce);
+                Vector3 halfDistance = (other.gameObject.transform.position - transform.position) * 0.5f;
+
+                var newParticleSystem = GameObject.Instantiate(collisonSparkEffect, transform.position + halfDistance, Quaternion.identity);
+                Destroy(newParticleSystem, 5.0f);
                 return;
             }
         }

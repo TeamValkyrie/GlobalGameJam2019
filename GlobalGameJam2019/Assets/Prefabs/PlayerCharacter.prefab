@@ -218,7 +218,7 @@ MonoBehaviour:
   weaponThrowForce: 2000
   weaponDistanceFromHolder: 10
   weaponRotationSpeed: 10
-  pickupRange: 10
+  pickupRange: 20
   pickupTag: Weapon
   audioSource: {fileID: 0}
   jumpFX:

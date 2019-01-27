@@ -139,6 +139,7 @@ public class GameManager : MonoBehaviour
             case GameState.SPAWNING:
                 SpawnPlayers();
                 EndGameTimerCurrent = EndGameTimer;
+                SetGameState(GameState.COUNTING);
                 break;
             case GameState.COUNTING:
                 StartCoroutine(StartCountdown());
