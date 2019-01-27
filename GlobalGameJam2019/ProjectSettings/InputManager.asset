@@ -211,7 +211,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 9
+    axis: 2
     joyNum: 1
   - serializedVersion: 3
     m_Name: Jump2
@@ -227,7 +227,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 9
+    axis: 2
     joyNum: 2
   - serializedVersion: 3
     m_Name: Jump3
@@ -243,7 +243,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 8
+    axis: 2
     joyNum: 3
   - serializedVersion: 3
     m_Name: Jump4
@@ -259,7 +259,7 @@ InputManager:
     snap: 0
     invert: 0
     type: 2
-    axis: 8
+    axis: 2
     joyNum: 4
   - serializedVersion: 3
     m_Name: Submit
