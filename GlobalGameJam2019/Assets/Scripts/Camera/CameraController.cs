@@ -172,7 +172,7 @@ public class CameraController : MonoBehaviour
 
     public void PreviewPlayer(float Time)
     {
-        previewTime = Time;
+        previewTime = Time / targets.Count;
         currentPreviewIndex = 0;
         currentPreviewTime = 0;
         isInPreview = true;
