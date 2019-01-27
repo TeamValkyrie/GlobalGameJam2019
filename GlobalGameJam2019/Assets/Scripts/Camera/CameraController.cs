@@ -33,14 +33,8 @@ public class CameraController : MonoBehaviour
     private bool enableZooming = true;
 
     private Vector3 velocity;
-    private Vector3 targetPosition;
     private List<Transform> targets;
     private Camera mainCamera;
-
-    private float previewTime = 4.0f;
-    private float currentPreviewTime = 0.0f;
-    private int currentPreviewIndex = 0;
-    private bool isInPreview;
 
     // Start is called before the first frame update
     void Start()
@@ -65,39 +59,16 @@ public class CameraController : MonoBehaviour
     // LateUpdate is called every frame, if the Behaviour is enabled
     void LateUpdate()
     {
-        if (!isInPreview)
+        if (targets.Count < 1)
         {
-            if (targets.Count < 1)
-            {
-                return;
-            }
-
-            targetPosition = GetCenterPoint();
-            Move();
-
-            if (enableZooming)
-            {
-                Zoom();
-            }
+            return;
         }
-        else
+
+        Move();
+
+        if (enableZooming)
         {
-            currentPreviewTime += Time.deltaTime;
-            targetPosition = targets[currentPreviewIndex].position;
-
-            Move();
             Zoom();
-
-            if(currentPreviewTime >= previewTime)
-            {
-                currentPreviewIndex++;
-                currentPreviewTime = 0;
-                if (currentPreviewIndex > targets.Count - 1)
-                {
-                    isInPreview = false;
-                    currentPreviewIndex--;
-                }
-            }
         }
     }
 
@@ -125,30 +96,20 @@ public class CameraController : MonoBehaviour
     // Find greatest possible distance between all players
     private float GetGreatestDistance()
     {
-        if (!isInPreview)
+        var bounds = new Bounds(targets[0].position, Vector3.zero);
+
+        for (int i = 0; i < targets.Count; i++)
         {
-            var bounds = new Bounds(targets[0].position, Vector3.zero);
-
-            for (int i = 0; i < targets.Count; i++)
-            {
-                bounds.Encapsulate(targets[i].position);
-            }
-
-            return bounds.size.x;
+            bounds.Encapsulate(targets[i].position);
         }
-        else
-        {
-            var bounds = new Bounds(targetPosition, Vector3.zero);
-            bounds.Encapsulate(targetPosition);
 
-            return bounds.size.x;
-        }
+        return bounds.size.x;
     }
 
     // Smoothly move the camera the the center of all players
     private void Move()
     {
-        Vector3 newPosition = targetPosition + offset;
+        Vector3 newPosition = GetCenterPoint() + offset;
         transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
     }
 
@@ -172,9 +133,5 @@ public class CameraController : MonoBehaviour
 
     public void PreviewPlayer(float Time)
     {
-        previewTime = Time / targets.Count;
-        currentPreviewIndex = 0;
-        currentPreviewTime = 0;
-        //isInPreview = true;
     }
 }
