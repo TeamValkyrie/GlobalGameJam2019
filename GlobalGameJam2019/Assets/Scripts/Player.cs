@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
     private bool isHoldingWeapon = false;
 
     [System.Serializable]
-    public enum SoundFXType {THROW, HURT, DEATH, JUMP1,JUMP2,JUMP3, TOUNT1, TOUNT2, TOUNT3, TOUNT4, FINAL};
+    public enum SoundFXType {THROW1, THROW2, THROW3, DEATH1, DEATH2 , DEATH3, JUMP1,JUMP2,JUMP3, TOUNT1, TOUNT2, TOUNT3, TOUNT4, FINAL};
 
     [Header("SoundFX")]
     private float randomPitchMin = 0.9f;
@@ -344,7 +344,7 @@ public class Player : MonoBehaviour
     private void ThrowWeapon()
     {
 
-        PlaySound(ActiveAudioSet[(int)SoundFXType.THROW]);
+        PlaySound(ActiveAudioSet[Random.Range((int)SoundFXType.THROW1, (int)SoundFXType.THROW3)]);
 
         isHoldingWeapon = false;
         weaponContainer.GetComponentInChildren<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
@@ -401,7 +401,7 @@ public class Player : MonoBehaviour
         isDead = true;
         GetComponent<Animator>().SetTrigger("Die");
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-        PlaySound(ActiveAudioSet[(int)SoundFXType.DEATH]);
+        PlaySound(ActiveAudioSet[Random.Range((int)SoundFXType.DEATH1,(int)SoundFXType.DEATH3)]);
         var newParticleSystem = GameObject.Instantiate(deathParticleSystem, gameObject.transform);
         newParticleSystem.GetComponent<ParticleSystem>().Play();
 
@@ -420,7 +420,6 @@ public class Player : MonoBehaviour
         if (TauntCooldownCurrent > TauntCooldown)
         {
             Vector2 input = new Vector2(Input.GetAxis("TauntX" + playerID), Input.GetAxis("TauntY" + playerID));
-            print(input.ToString());
             if (input.x < -0.1f)
             {
                 TauntCooldownCurrent = 0.0f;
