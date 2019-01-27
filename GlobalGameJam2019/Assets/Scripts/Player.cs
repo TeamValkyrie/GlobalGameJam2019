@@ -318,10 +318,9 @@ public class Player : MonoBehaviour
     {
         isHoldingWeapon = false;
         weaponContainer.GetComponentInChildren<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-        weaponContainer.GetComponentInChildren<WeaponBase>().SetCombatCollidersActive(false);
-        weaponContainer.GetComponentInChildren<WeaponBase>().SetPhysicalCollidersActive(true);
         weaponContainer.GetComponentInChildren<WeaponBase>().carrier = null;
         weaponContainer.GetComponentInChildren<WeaponBase>().isHeld = false;
+        weaponContainer.GetComponentInChildren<WeaponBase>().isFlying = true;
         weaponContainer.GetComponentInChildren<Rigidbody2D>().simulated = true;
 
         Vector2 force = new Vector2();

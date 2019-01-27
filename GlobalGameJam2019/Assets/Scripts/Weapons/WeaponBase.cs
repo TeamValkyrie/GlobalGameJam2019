@@ -11,6 +11,7 @@ public class WeaponBase : MonoBehaviour
     public float knockbackForce = 10.0f;
     public bool isHeld = false;
     public Player carrier;
+    public bool isFlying = false;
 
     private void Start()
     {
@@ -41,6 +42,17 @@ public class WeaponBase : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (isFlying)
+        {
+             if (other.transform.tag == "Player") 
+             {
+                 other.GetComponentInParent<Player>().KillPlayer();
+             }
+             isFlying = false;
+             SetCombatCollidersActive(false);
+             SetPhysicalCollidersActive(true);
+        }
+
         if (other.transform.tag == "Weapon")
         {
             var weaponComponent = other.GetComponent<WeaponBase>();
