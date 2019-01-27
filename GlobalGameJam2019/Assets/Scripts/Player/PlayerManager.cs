@@ -15,7 +15,7 @@ public class PlayerManager : MonoBehaviour
 
     public List<GameObject> playerCharacters = new List<GameObject>();
 
-    [SerializeField] List<string> playerNames;
+    [SerializeField] public List<string> playerNames;
     private CameraController cameraController;
 
     private static PlayerManager instance;

@@ -166,9 +166,10 @@ public class GameManager : MonoBehaviour
     {
         playerManager.FindSpawnPoints();
 
-        for(int i = 0; i < playerManager.GetConnectedPlayers(); i++)
-        { 
-            playerManager.SpawnPlayer(i);
+        for(int i = 0; i < playerManager.playerNames.Count; i++)
+        {
+            if (playerManager.playerNames[i] != "none")
+                playerManager.SpawnPlayer(i);
         }
     }
 

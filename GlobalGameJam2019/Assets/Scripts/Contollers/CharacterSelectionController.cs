@@ -73,6 +73,10 @@ public class CharacterSelectionController : MonoBehaviour
                         {
                             finalSelections.Add(characters[selection.characterIndex].name);
                         }
+                        else
+                        {
+                            finalSelections.Add("none");
+                        }
                     }
 
                     playerManager.SetPlayers(finalSelections);
