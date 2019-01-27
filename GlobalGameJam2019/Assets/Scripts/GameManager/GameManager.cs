@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -39,6 +40,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private List<int> Scores;
+
+    [SerializeField]
+    private Text[] ScoreTexts;
 
     [SerializeField]
     string[] levelNames;
@@ -261,7 +265,9 @@ public class GameManager : MonoBehaviour
                 Scores[player.GetComponent<Player>().playerID-1]++;
             }
         }
+        for(int i = 0; i < Scores.Count; i++)
+        {
+            ScoreTexts[i].text = "Player" + (i + 1) + ":" + Scores[i];
+        }
     }
-
-
 }

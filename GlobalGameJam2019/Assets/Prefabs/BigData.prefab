@@ -3434,6 +3434,11 @@ MonoBehaviour:
   PlayTimer: 0
   EndGamePanel: {fileID: 4507489808924082507}
   Scores: 
+  ScoreTexts:
+  - {fileID: 6814579872440616122}
+  - {fileID: 4637389485783015710}
+  - {fileID: 6145599574078549858}
+  - {fileID: 3659434854210168217}
   levelNames:
   - _Kitchen
   - _Bedroom

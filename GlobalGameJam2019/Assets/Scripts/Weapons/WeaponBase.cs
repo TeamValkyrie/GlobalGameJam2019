@@ -16,10 +16,29 @@ public class WeaponBase : MonoBehaviour
     [Header("Effects")]
     [SerializeField] private GameObject collisonSparkEffect;
 
+    public enum WeaponSFXType { COLLISION1, COLLISION2, THROW, FINAL };
+
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip[] WeaponSFXClips = new AudioClip[(int)WeaponSFXType.FINAL];
+
     private void Start()
     {
         SetCombatCollidersActive(false);
         SetPhysicalCollidersActive(true);
+
+        audioSource = GetComponent<AudioSource>();
+        
+    }
+
+    private void PlaySound(AudioClip sound)
+    {
+        audioSource.PlayOneShot(sound);
+    }
+
+    public void PlayThrowSound()
+    {
+        PlaySound(WeaponSFXClips[(int)WeaponSFXType.THROW]);
     }
 
     public void SetCombatCollidersActive(bool newState)
@@ -50,7 +69,8 @@ public class WeaponBase : MonoBehaviour
              if (other.transform.tag == "Player") 
              {
                  other.GetComponentInParent<Player>().KillPlayer();
-             }
+                PlaySound(WeaponSFXClips[Random.Range((int)WeaponSFXType.COLLISION1, (int)WeaponSFXType.COLLISION2)]);
+            }
              isFlying = false;
              SetCombatCollidersActive(false);
              SetPhysicalCollidersActive(true);
@@ -77,6 +97,7 @@ public class WeaponBase : MonoBehaviour
             {
                 if (!other.GetComponentInParent<Player>().isDead)
                 {
+                    PlaySound(WeaponSFXClips[Random.Range((int)WeaponSFXType.COLLISION1,(int)WeaponSFXType.COLLISION2)]);
                     other.GetComponentInParent<Player>().KillPlayer();
                 }
             }

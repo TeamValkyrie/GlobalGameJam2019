@@ -45,11 +45,19 @@ public class Player : MonoBehaviour
     public string pickupTag = "Weapon";
     private bool isHoldingWeapon = false;
 
+    [System.Serializable]
+    public enum SoundFXType {THROW, HURT, DEATH, JUMP1,JUMP2,JUMP3, TOUNT1, TOUNT2, TOUNT3, TOUNT4, FINAL};
+
     [Header("SoundFX")]
     private float randomPitchMin = 0.9f;
     private float randomPitchMax = 1.1f;
-    [SerializeField] private AudioSource audioSource;
+    private AudioSource audioSource;
     [SerializeField] private AudioClip[] jumpFX;
+    [SerializeField] private AudioClip[] ActiveAudioSet;
+    [SerializeField] private AudioClip[] FishySounds = new AudioClip[(int)SoundFXType.FINAL];
+    [SerializeField] private AudioClip[] CattoSounds = new AudioClip[(int)SoundFXType.FINAL];
+    [SerializeField] private AudioClip[] ChickSounds = new AudioClip[(int)SoundFXType.FINAL];
+    [SerializeField] private AudioClip[] KonineSounds = new AudioClip[(int)SoundFXType.FINAL];
 
     private bool isBeingKnockBacked;
     [SerializeField] private float knockbacktime = 0.2f;
@@ -89,24 +97,28 @@ public class Player : MonoBehaviour
                 Catto.active = false;
                 Chick.active = true;
                 Konine.active = false;
+                ActiveAudioSet = ChickSounds;
                 break;
             case "Konine":
                 FishKom.active = false;
                 Catto.active = false;
                 Chick.active = false;
                 Konine.active = true;
+                ActiveAudioSet = KonineSounds;
                 break;
             case "Fishy":
                 FishKom.active = true;
                 Catto.active = false;
                 Chick.active = false;
                 Konine.active = false;
+                ActiveAudioSet = FishySounds;
                 break;
             case "Catto":
                 FishKom.active = false;
                 Catto.active = true;
                 Chick.active = false;
                 Konine.active = false;
+                ActiveAudioSet = CattoSounds;
                 break;
         }
     }
@@ -316,11 +328,15 @@ public class Player : MonoBehaviour
 
     private void ThrowWeapon()
     {
+
+        PlaySound(ActiveAudioSet[(int)SoundFXType.THROW]);
+
         isHoldingWeapon = false;
         weaponContainer.GetComponentInChildren<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         weaponContainer.GetComponentInChildren<WeaponBase>().carrier = null;
         weaponContainer.GetComponentInChildren<WeaponBase>().isHeld = false;
         weaponContainer.GetComponentInChildren<WeaponBase>().isFlying = true;
+        weaponContainer.GetComponentInChildren<WeaponBase>().PlayThrowSound();
         weaponContainer.GetComponentInChildren<Rigidbody2D>().simulated = true;
 
         Vector2 force = new Vector2();
@@ -334,7 +350,7 @@ public class Player : MonoBehaviour
 
     public void PlayJumpSoundFX()
     {
-        PlaySound(jumpFX);
+        PlaySound(ActiveAudioSet[Random.Range((int)SoundFXType.JUMP1,(int)SoundFXType.JUMP3)]);
     }
 
     private void PlaySound(AudioClip sound)
@@ -370,7 +386,7 @@ public class Player : MonoBehaviour
         isDead = true;
         GetComponent<Animator>().SetTrigger("Die");
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-        //GetComponent<Rigidbody2D>()
+        PlaySound(ActiveAudioSet[(int)SoundFXType.DEATH]);
         var newParticleSystem = GameObject.Instantiate(deathParticleSystem, gameObject.transform);
         newParticleSystem.GetComponent<ParticleSystem>().Play();
 
@@ -382,4 +398,8 @@ public class Player : MonoBehaviour
         isDead = false;
     }
 
+    private void TauntInput()
+    {
+
+    }
 }
