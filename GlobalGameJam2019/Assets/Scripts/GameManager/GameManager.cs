@@ -146,9 +146,11 @@ public class GameManager : MonoBehaviour
                 SetGameState(GameState.COUNTING);
                 break;
             case GameState.COUNTING:
+                playerManager.FreezePlayerMovement();
                 StartCoroutine(StartCountdown());
                 break;
             case GameState.PLAYING:
+                playerManager.UnFreezePlayerMovement();
                 canvasManager.ToggleOptions(false);
                 canvasManager.TogglePause(false);
                 audioManager.PlayMusic(BattleMusicName);

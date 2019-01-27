@@ -49,6 +49,22 @@ public class PlayerManager : MonoBehaviour
         PollControllers();
     }
 
+    public void FreezePlayerMovement()
+    {
+        foreach(GameObject player in playerCharacters)
+        {
+            player.GetComponent<Player>().isFrozen = true;
+        }
+    }
+
+    public void UnFreezePlayerMovement()
+    {
+        foreach (GameObject player in playerCharacters)
+        {
+            player.GetComponent<Player>().isFrozen = false;
+        }
+    }
+
     public void FindSpawnPoints()
     {
         spawnPoints = new List<Transform>();

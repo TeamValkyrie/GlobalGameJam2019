@@ -7,7 +7,9 @@ public class Player : MonoBehaviour
 {
     public int playerID;
 
+    [Header("Debug")]
     public bool isDead = false;
+    public bool isFrozen = false;
 
     [Header("Movement values")]
     public float accelerationTimeAir = .2f;
@@ -137,7 +139,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (!isDead)
+        if (!isDead && !isFrozen)
         {
             UpdateMovement();
             UpdateWeaponDirection();
