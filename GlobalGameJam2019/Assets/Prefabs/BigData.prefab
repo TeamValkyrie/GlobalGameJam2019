@@ -4432,17 +4432,17 @@ PrefabInstance:
     - target: {fileID: 4605574864962828309, guid: 30b9793431949cc4686e2f28261eb384,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 51.27
       objectReference: {fileID: 0}
     - target: {fileID: 4605574864962828309, guid: 30b9793431949cc4686e2f28261eb384,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 290.9
       objectReference: {fileID: 0}
     - target: {fileID: 4605574864962828309, guid: 30b9793431949cc4686e2f28261eb384,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -529.9
       objectReference: {fileID: 0}
     - target: {fileID: 4605574864962828309, guid: 30b9793431949cc4686e2f28261eb384,
         type: 3}
@@ -4484,6 +4484,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4605574864962828308, guid: 30b9793431949cc4686e2f28261eb384,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605574864962828308, guid: 30b9793431949cc4686e2f28261eb384,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605574864962828308, guid: 30b9793431949cc4686e2f28261eb384,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605574864962828308, guid: 30b9793431949cc4686e2f28261eb384,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605574864962828310, guid: 30b9793431949cc4686e2f28261eb384,
+        type: 3}
+      propertyPath: CameraEffectMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 28d84839b25509943a8b4336f2ced82e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30b9793431949cc4686e2f28261eb384, type: 3}
 --- !u!4 &4605574864115753999 stripped
@@ -4578,11 +4603,44 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 2813565561706493382, guid: 5a6c0944b9cfb8e49a4e3b46b2c0805f,
         type: 3}
+      propertyPath: SpawnPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 2813565561570686142}
+    - target: {fileID: 2813565561706493382, guid: 5a6c0944b9cfb8e49a4e3b46b2c0805f,
+        type: 3}
+      propertyPath: SpawnPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 2813565562991601558}
+    - target: {fileID: 2813565561706493382, guid: 5a6c0944b9cfb8e49a4e3b46b2c0805f,
+        type: 3}
+      propertyPath: SpawnPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 2813565562580661803}
+    - target: {fileID: 2813565561706493382, guid: 5a6c0944b9cfb8e49a4e3b46b2c0805f,
+        type: 3}
       propertyPath: MaxWeapons
       value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a6c0944b9cfb8e49a4e3b46b2c0805f, type: 3}
+--- !u!4 &2813565561570686142 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2813565561386825031, guid: 5a6c0944b9cfb8e49a4e3b46b2c0805f,
+    type: 3}
+  m_PrefabInstance: {fileID: 923435513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2813565562991601558 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2813565562102769263, guid: 5a6c0944b9cfb8e49a4e3b46b2c0805f,
+    type: 3}
+  m_PrefabInstance: {fileID: 923435513}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2813565562580661803 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2813565562262583250, guid: 5a6c0944b9cfb8e49a4e3b46b2c0805f,
+    type: 3}
+  m_PrefabInstance: {fileID: 923435513}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2813565560984646718 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2813565561706493383, guid: 5a6c0944b9cfb8e49a4e3b46b2c0805f,

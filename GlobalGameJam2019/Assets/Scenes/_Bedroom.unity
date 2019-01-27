@@ -557,6 +557,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4605574864115753999, guid: 1e2d04bdb9b44304aa9bee95cb03b989,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -529.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605574864115753999, guid: 1e2d04bdb9b44304aa9bee95cb03b989,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 290.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605574864115753999, guid: 1e2d04bdb9b44304aa9bee95cb03b989,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 51.27
+      objectReference: {fileID: 0}
     - target: {fileID: 6097899880419908963, guid: 1e2d04bdb9b44304aa9bee95cb03b989,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -567,6 +582,31 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4605574864115753998, guid: 1e2d04bdb9b44304aa9bee95cb03b989,
+        type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605574864115753998, guid: 1e2d04bdb9b44304aa9bee95cb03b989,
+        type: 3}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605574864115753998, guid: 1e2d04bdb9b44304aa9bee95cb03b989,
+        type: 3}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605574864115753998, guid: 1e2d04bdb9b44304aa9bee95cb03b989,
+        type: 3}
+      propertyPath: m_BackGroundColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4605574864115753996, guid: 1e2d04bdb9b44304aa9bee95cb03b989,
+        type: 3}
+      propertyPath: CameraEffectMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 28d84839b25509943a8b4336f2ced82e, type: 2}
     - target: {fileID: 6097899880419908960, guid: 1e2d04bdb9b44304aa9bee95cb03b989,
         type: 3}
       propertyPath: m_IsActive
