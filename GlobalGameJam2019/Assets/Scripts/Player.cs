@@ -45,9 +45,6 @@ public class Player : MonoBehaviour
     public string pickupTag = "Weapon";
     private bool isHoldingWeapon = false;
 
-    [Header("Juice")]
-    public ParticleSystem walkingParticle;
-
     [Header("SoundFX")]
     private float randomPitchMin = 0.9f;
     private float randomPitchMax = 1.1f;
@@ -57,6 +54,9 @@ public class Player : MonoBehaviour
     private bool isBeingKnockBacked;
     [SerializeField] private float knockbacktime = 0.2f;
     [SerializeField] private float knockbacktimeleft = 0.2f;
+
+    [Header("Particles")]
+    [SerializeField] private GameObject deathParticleSystem;
 
     private float gravity;
     private float jumpVelocity;
@@ -368,6 +368,12 @@ public class Player : MonoBehaviour
             DropWeapon();
         }
         isDead = true;
+        GetComponent<Animator>().SetTrigger("Die");
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        //GetComponent<Rigidbody2D>()
+        var newParticleSystem = GameObject.Instantiate(deathParticleSystem, gameObject.transform);
+        newParticleSystem.GetComponent<ParticleSystem>().Play();
+
         Debug.Log("Player with ID: " + playerID + " died");  
     }
 

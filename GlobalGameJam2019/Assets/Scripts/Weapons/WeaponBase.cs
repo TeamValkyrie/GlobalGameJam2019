@@ -64,11 +64,14 @@ public class WeaponBase : MonoBehaviour
             }
         }
 
-        if (other.transform.tag == "Player" && other.gameObject != carrier.gameObject)
+        if (carrier != null)
         {
-            if (!other.GetComponentInParent<Player>().isDead)
+            if (other.transform.tag == "Player" && other.gameObject != carrier.gameObject)
             {
-                other.GetComponentInParent<Player>().KillPlayer();
+                if (!other.GetComponentInParent<Player>().isDead)
+                {
+                    other.GetComponentInParent<Player>().KillPlayer();
+                }
             }
         }
     }
