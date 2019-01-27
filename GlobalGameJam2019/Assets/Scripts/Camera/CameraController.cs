@@ -33,6 +33,7 @@ public class CameraController : MonoBehaviour
     private bool enableZooming = true;
 
     private Vector3 velocity;
+    private Vector3 targetPosition;
     private List<Transform> targets;
     private Camera mainCamera;
 
@@ -71,6 +72,7 @@ public class CameraController : MonoBehaviour
                 return;
             }
 
+            targetPosition = GetCenterPoint();
             Move();
 
             if (enableZooming)
@@ -81,18 +83,21 @@ public class CameraController : MonoBehaviour
         else
         {
             currentPreviewTime += Time.deltaTime;
-            transform.position = targets[currentPreviewIndex].position;
-            mainCamera.fieldOfView = 100.0f;
+            targetPosition = targets[currentPreviewIndex].position;
+
+            Move();
+            Zoom();
+
             if(currentPreviewTime >= previewTime)
             {
                 currentPreviewIndex++;
-                if(currentPreviewIndex > targets.Count - 1)
+                currentPreviewTime = 0;
+                if (currentPreviewIndex > targets.Count - 1)
                 {
                     isInPreview = false;
                     currentPreviewIndex--;
                 }
             }
-            
         }
     }
 
@@ -120,21 +125,30 @@ public class CameraController : MonoBehaviour
     // Find greatest possible distance between all players
     private float GetGreatestDistance()
     {
-        var bounds = new Bounds(targets[0].position, Vector3.zero);
-
-        for (int i = 0; i < targets.Count; i++)
+        if (!isInPreview)
         {
-            bounds.Encapsulate(targets[i].position);
-        }
+            var bounds = new Bounds(targets[0].position, Vector3.zero);
 
-        return bounds.size.x;
+            for (int i = 0; i < targets.Count; i++)
+            {
+                bounds.Encapsulate(targets[i].position);
+            }
+
+            return bounds.size.x;
+        }
+        else
+        {
+            var bounds = new Bounds(targetPosition, Vector3.zero);
+            bounds.Encapsulate(targetPosition);
+
+            return bounds.size.x;
+        }
     }
 
     // Smoothly move the camera the the center of all players
     private void Move()
     {
-        Vector3 centerPoint = GetCenterPoint();
-        Vector3 newPosition = centerPoint + offset;
+        Vector3 newPosition = targetPosition + offset;
         transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
     }
 
