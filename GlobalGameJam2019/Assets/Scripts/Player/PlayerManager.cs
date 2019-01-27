@@ -88,8 +88,6 @@ public class PlayerManager : MonoBehaviour
         playerCharacters.Add(newPlayer);
         newPlayer.GetComponent<Player>().playerID = id + 1;
         Debug.Log("Player spawned!");
-        cameraController = FindObjectOfType<CameraController>();
-        cameraController.FindTargets();
     }
 
     public int GetConnectedPlayers()

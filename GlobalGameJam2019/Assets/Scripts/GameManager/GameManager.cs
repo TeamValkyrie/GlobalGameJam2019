@@ -203,7 +203,7 @@ public class GameManager : MonoBehaviour
         SetGameState(GameState.PLAYING);
     }
 
-    public void LoadScene(string name)
+    public void LoadLevel(string name)
     {
         SceneManager.LoadScene(SceneManager.GetSceneByName(name).buildIndex);
     }

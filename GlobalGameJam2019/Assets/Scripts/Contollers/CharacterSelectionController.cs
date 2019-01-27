@@ -77,6 +77,7 @@ public class CharacterSelectionController : MonoBehaviour
 
                     playerManager.SetPlayers(finalSelections);
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                    return;
                 }
             }
         }

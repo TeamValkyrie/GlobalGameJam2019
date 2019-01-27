@@ -36,8 +36,6 @@ public class CameraController : MonoBehaviour
     private List<Transform> targets;
     private Camera mainCamera;
 
-    [SerializeField] private Material CameraEffectMaterial;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -81,10 +79,10 @@ public class CameraController : MonoBehaviour
 
         foreach (GameObject foundTarget in foundTargets)
         {
-            if (targets.Contains(foundTarget.transform) == false)
-            {
-                targets.Add(foundTarget.transform);
-            }
+            if (foundTarget == null || targets.Contains(foundTarget.transform))
+                continue;
+
+            targets.Add(foundTarget.transform);
         }
     }
 
@@ -132,10 +130,5 @@ public class CameraController : MonoBehaviour
         }
 
         return bounds.center;
-    }
-
-    private void OnRenderImage(RenderTexture src, RenderTexture dst)
-    {
-        Graphics.Blit(src, dst, CameraEffectMaterial);        
     }
 }

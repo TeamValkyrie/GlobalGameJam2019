@@ -26,6 +26,9 @@ public class RaycastController: MonoBehaviour
 
     public void UpdateRaycastOrigins()
     {
+        if(collider == null)
+            return;
+     
         Bounds bounds = collider.bounds;
         bounds.Expand(skinWidth * -2);
 
