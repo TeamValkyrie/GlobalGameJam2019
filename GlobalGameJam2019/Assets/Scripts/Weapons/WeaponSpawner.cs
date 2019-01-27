@@ -6,7 +6,7 @@ public class WeaponSpawner : MonoBehaviour
 {
 
     [SerializeField] GameObject[] WeaponPrefabs;
-    [SerializeField] Transform[] SpawnPoints;
+    GameObject[] SpawnPoints;
     [SerializeField] int MaxWeapons = 5;
 
     [SerializeField] private float maxSpawnDelay = 0.1f;
@@ -16,6 +16,7 @@ public class WeaponSpawner : MonoBehaviour
     private void Start()
     {
         spawnDelay = maxSpawnDelay;
+        SpawnPoints = GameObject.FindGameObjectsWithTag("WeaponSpawnPoint");
     }
 
     // Update is called once per frame
@@ -36,7 +37,7 @@ public class WeaponSpawner : MonoBehaviour
     {
         if (SpawnPoints.Length > 0)
         {
-            Transform SpawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)];
+            Transform SpawnPoint = SpawnPoints[Random.Range(0, SpawnPoints.Length)].transform;
             Instantiate(WeaponPrefab, SpawnPoint);
             numberOfWeapons++;
         }
