@@ -82,7 +82,7 @@ public class CameraController : MonoBehaviour
         {
             currentPreviewTime += Time.deltaTime;
             transform.position = targets[currentPreviewIndex].position;
-            mainCamera.fieldOfView = 200.0f;
+            mainCamera.fieldOfView = 100.0f;
             if(currentPreviewTime >= previewTime)
             {
                 currentPreviewIndex++;
