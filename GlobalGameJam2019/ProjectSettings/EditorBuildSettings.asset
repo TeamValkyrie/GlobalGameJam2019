@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Startup_Scene.unity
     guid: 98bd09d3149f8b745982a2b472141dd6
   - enabled: 1
-    path: Assets/Scenes/feat_characterselect.unity
+    path: Assets/Scenes/Character_Select.unity
     guid: 97740cbb450caaf488bb8e2cb4614976
   - enabled: 1
     path: Assets/Scenes/_LivingRoom.unity

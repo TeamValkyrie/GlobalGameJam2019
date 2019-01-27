@@ -232,27 +232,28 @@ public class Player : MonoBehaviour
         }
 
 
-        if(Input.GetButton("Jump"+playerID))
+        if(Input.GetAxis("Jump" + playerID) > 0.0f)
         {
             bool walljumped = false;
-            
-            if(wallSliding)
+            float jumpAxisVelocity = Input.GetAxis("Jump" + playerID);
+
+            if (wallSliding)
             {
                 walljumped = true;
                 if(wallDirX == input.x)
                 {
-                    velocity.x = -wallDirX * wallJumpClimb.x;
-                    velocity.y = wallJumpClimb.y;
+                    velocity.x = jumpAxisVelocity * -wallDirX * wallJumpClimb.x;
+                    velocity.y = jumpAxisVelocity *  wallJumpClimb.y;
                 }
                 else if(input.x == 0)
                 {
-                    velocity.x = -wallDirX * wallJumpOff.x;
-                    velocity.y = wallJumpOff.y;
+                    velocity.x = jumpAxisVelocity *  -wallDirX * wallJumpOff.x;
+                    velocity.y = jumpAxisVelocity *  wallJumpOff.y;
                 }
                 else
                 {
-                    velocity.x = -wallDirX * wallLeap.x;
-                    velocity.y = wallLeap.y;
+                    velocity.x = jumpAxisVelocity *  -wallDirX * wallLeap.x;
+                    velocity.y = jumpAxisVelocity * wallLeap.y;
                 }
             }
             if(controller.collisions.below || ((Time.time - lastJumpTime > jumpDelay) && (jumpsRemaining > 0)))

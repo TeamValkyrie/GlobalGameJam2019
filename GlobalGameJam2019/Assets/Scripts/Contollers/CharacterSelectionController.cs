@@ -25,6 +25,7 @@ public class CharacterSelectionController : MonoBehaviour
     public GameObject joinPanel;
     public GameObject startPanel;
     public GameObject startIndicator;
+    public GameObject split;
     public Sprite unknownCharacter;
     public Sprite placeholder;
 
@@ -136,20 +137,50 @@ public class CharacterSelectionController : MonoBehaviour
                     playerSelections[i].isReady = false;
                     playerInterfaces[i].ready.gameObject.SetActive(false);
                     playersAreReady = false;
+
+                    if (split.activeInHierarchy)
+                    {
+                        split.SetActive(false);
+                    }
+
+                    if (startPanel.activeInHierarchy)
+                    {
+                        startPanel.SetActive(false);
+                    }
                 }
             }
         }
 
         if (playerManager.GetConnectedPlayers() > 0)
         {
-            joinPanel.SetActive(false);
-            startPanel.SetActive(true);
+            if (playersAreReady)
+            {
+                if (!split.activeInHierarchy)
+                {
+                    split.SetActive(true);
+                }
+
+                if (!startPanel.activeInHierarchy)
+                {
+                    startPanel.SetActive(true);
+                }
+            }
+
+            if (joinPanel.activeInHierarchy)
+            {
+                joinPanel.SetActive(false);
+            }
         }
         else
         {
             if (!joinPanel.activeInHierarchy)
             {
                 joinPanel.SetActive(true);
+            }
+
+            if (split.activeInHierarchy)
+            {
+                split.SetActive(false);
             }
 
             if (startPanel.activeInHierarchy)
