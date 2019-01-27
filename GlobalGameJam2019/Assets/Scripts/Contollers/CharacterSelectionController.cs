@@ -34,6 +34,11 @@ public class CharacterSelectionController : MonoBehaviour
     private bool playersAreReady = false;
     private int readyPlayers = 0;
 
+    [SerializeField] AudioClip ChickAnouncer;
+    [SerializeField] AudioClip KonineAnouncer;
+    [SerializeField] AudioClip KattoAnouncer;
+    [SerializeField] AudioClip FishkomAnouncer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -115,7 +120,7 @@ public class CharacterSelectionController : MonoBehaviour
                 if (playerSelections[i].characterIndex != -1)
                 {
                     playerSelections[i].isReady = true;
-
+                    PlayAnouncerVoice(characters[playerSelections[i].characterIndex].name);
                     if (playerSelections[i].isReady)
                     {
                         readyPlayers++;
@@ -229,4 +234,25 @@ public class CharacterSelectionController : MonoBehaviour
 
         Debug.Log("Player " + playerIndex + " selected the previous character");
     }
+
+    void PlayAnouncerVoice(string name)
+    {
+        switch (name)
+        {
+            case "Fishy":
+                GetComponent<AudioSource>().PlayOneShot(FishkomAnouncer);
+                break;
+            case "Chick":
+                GetComponent<AudioSource>().PlayOneShot(ChickAnouncer);
+                break;
+            case "Konine":
+                GetComponent<AudioSource>().PlayOneShot(KonineAnouncer);
+                break;
+            case "Catto":
+                GetComponent<AudioSource>().PlayOneShot(KattoAnouncer);
+                break;
+        }
+    }
+
+
 }

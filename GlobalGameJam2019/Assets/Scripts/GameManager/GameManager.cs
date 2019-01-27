@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.COUNTING:
                 playerManager.FreezePlayerMovement();
-                //cameraController.PreviewPlayer(timeManager.countdownFrom);
+                cameraController.PreviewPlayer(timeManager.countdownFrom);
                 StartCoroutine(StartCountdown());
                 break;
             case GameState.PLAYING:
