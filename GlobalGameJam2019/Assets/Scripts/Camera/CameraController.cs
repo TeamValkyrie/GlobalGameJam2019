@@ -175,6 +175,6 @@ public class CameraController : MonoBehaviour
         previewTime = Time / targets.Count;
         currentPreviewIndex = 0;
         currentPreviewTime = 0;
-        isInPreview = true;
+        //isInPreview = true;
     }
 }
