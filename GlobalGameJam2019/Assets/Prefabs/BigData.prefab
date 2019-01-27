@@ -3441,15 +3441,13 @@ MonoBehaviour:
   PlayTimer: 0
   EndGamePanel: {fileID: 4507489808924082507}
   Scores: 
-  ScoreTexts:
-  - {fileID: 6814579872440616122}
-  - {fileID: 4637389485783015710}
-  - {fileID: 6145599574078549858}
-  - {fileID: 3659434854210168217}
   levelNames:
   - _Kitchen
   - _Bedroom
   - _LivingRoom
+  pointPopup: {fileID: 7336631023060172370, guid: 3bc135bd2c214434abc5f7e82c1720de,
+    type: 3}
+  pointSound: {fileID: 0}
   EndGameTimer: 5
 --- !u!1 &6097899881699987288
 GameObject:
