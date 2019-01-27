@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -41,6 +40,13 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private List<int> Scores;
 
+    [SerializeField]
+    string[] levelNames;
+
+    [SerializeField] float EndGameTimer = 5.0f;
+    float EndGameTimerCurrent;
+
+
     //Awake is always called before any Start functions
     void Awake()
     {
@@ -62,7 +68,11 @@ public class GameManager : MonoBehaviour
         canvasManager = FindObjectOfType<CanvasManager>();
         playerManager = FindObjectOfType<PlayerManager>();
 
-        Scores = new List<int>(playerManager.GetConnectedPlayers());
+        Scores = new List<int>();
+        Scores.Add(0);
+        Scores.Add(0);
+        Scores.Add(0);
+        Scores.Add(0);
 
         SetGameState(GameState.SPAWNING);
     }
@@ -70,8 +80,21 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameState != GameState.ENDGAME)
+        {
+            CheckForEndGame();
+        }
+        else
+        {
+            EndGameTimerCurrent -= Time.deltaTime;
+            if(EndGameTimerCurrent <= 0.0f)
+            {
+                playerManager.playerCharacters.Clear();
+                SceneManager.LoadScene(levelNames[Random.Range(0,levelNames.Length)]);
+            }
+        }
 
-        CheckForEndGame();
+
 
         if (Input.GetButtonUp("Cancel"))
         {
@@ -92,7 +115,7 @@ public class GameManager : MonoBehaviour
 
     private void CheckForEndGame()
     {
-        int alivecount = 0;
+       int alivecount = 0;
        foreach(GameObject player in playerManager.playerCharacters)
         {
             if (!player.GetComponent<Player>().isDead)
@@ -115,6 +138,7 @@ public class GameManager : MonoBehaviour
         {
             case GameState.SPAWNING:
                 SpawnPlayers();
+                EndGameTimerCurrent = EndGameTimer;
                 break;
             case GameState.COUNTING:
                 StartCoroutine(StartCountdown());
@@ -230,7 +254,7 @@ public class GameManager : MonoBehaviour
         {
             if (!player.GetComponent<Player>().isDead)
             {
-                Scores[player.GetComponent<Player>().playerID]++;
+                Scores[player.GetComponent<Player>().playerID-1]++;
             }
         }
     }
