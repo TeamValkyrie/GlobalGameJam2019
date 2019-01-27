@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public float accelerationTimeGround = .1f;
     public float movementSpeed = 6;
     public Transform model;
+    public Transform rotationContainer;
     public float modelRotationSpeed = 10.0f;
 
     [Header("Jump values")]
@@ -164,22 +165,30 @@ public class Player : MonoBehaviour
 
     private void UpdateMovement()
     {
-        Vector2 input = new Vector2(Input.GetAxis("Horizontal"+playerID), Input.GetAxis("Vertical"+playerID));
+        Vector2 input = new Vector2(Input.GetAxis("Horizontal" + playerID), Input.GetAxis("Vertical" + playerID));
         int wallDirX = (controller.collisions.left) ? -1 : 1;
+        float newRotationY = rotationContainer.eulerAngles.y;
 
-        Vector3 moveDirection = new Vector3(input.x, 0.0f, 0.0f);
-        
+        if (Input.GetAxis("Horizontal" + playerID) > 0.0f)
+        {
+            newRotationY = -900.0f;
+        }
+        else
+        {
+            newRotationY = 0.0f;
+        }
+
+        rotationContainer.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, new Vector3(0.0f, newRotationY, 0.0f), modelRotationSpeed * Time.deltaTime);
+
         if (Mathf.Abs(input.x) > 0.1f) //Right rotation animation
         {
-            var newRoation = Quaternion.LookRotation(moveDirection);
-            model.transform.rotation = Quaternion.Slerp(model.transform.rotation, newRoation, modelRotationSpeed * Time.deltaTime);
+            //var newRoation = Quaternion.LookRotation(moveDirection);
+            //model.transform.rotation = Quaternion.Slerp(model.transform.rotation, newRoation, modelRotationSpeed * Time.deltaTime);
             animator.SetFloat("MovementSpeed", Mathf.Abs(input.x));
-
         }
         else
         {
             animator.SetFloat("MovementSpeed", 0);
-            
         }
 
         float targetVelocityX = input.x * movementSpeed;
