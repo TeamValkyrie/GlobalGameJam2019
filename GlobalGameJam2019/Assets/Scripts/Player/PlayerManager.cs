@@ -38,6 +38,8 @@ public class PlayerManager : MonoBehaviour
     {
         cameraController = FindObjectOfType<CameraController>();
 
+        spawnPoints = new List<Transform>();
+
         PollControllers();
     }
 
@@ -45,6 +47,17 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         PollControllers();
+    }
+
+    public void FindSpawnPoints()
+    {
+        GameObject[] foundSpawnPoints = GameObject.FindGameObjectsWithTag("PlayerSpawnPoint");
+
+        foreach(GameObject foundSpawnPoint in foundSpawnPoints)
+        {
+            spawnPoints.Add(foundSpawnPoint.transform);
+        }
+
     }
 
     private void PollControllers()
@@ -82,11 +95,13 @@ public class PlayerManager : MonoBehaviour
 
     public void SpawnPlayer(int id)
     {
-        int randomNumber = Random.Range(0, spawnPoints.Count);
-        GameObject newPlayer = Instantiate(playerPrefab, new Vector2(50.0f,50.0f), Quaternion.identity);
+        int randomNumber = Random.Range(0, spawnPoints.Count - 1);
+        GameObject newPlayer = Instantiate(playerPrefab, spawnPoints[randomNumber].position, Quaternion.identity);
+        spawnPoints.RemoveAt(randomNumber);
         newPlayer.GetComponent<Player>().SetModel(playerNames[id]);
         playerCharacters.Add(newPlayer);
         newPlayer.GetComponent<Player>().playerID = id + 1;
+        newPlayer.transform.position = new Vector3(newPlayer.transform.position.x, newPlayer.transform.position.y, 0.0f);
         Debug.Log("Player spawned!");
     }
 
