@@ -53,6 +53,8 @@ public class Player : MonoBehaviour
     [Header("SoundFX")]
     private float randomPitchMin = 0.9f;
     private float randomPitchMax = 1.1f;
+    [SerializeField] float TauntCooldown = 2.0f;
+    float TauntCooldownCurrent = 2.0f;
     private AudioSource audioSource;
     [SerializeField] private AudioClip[] jumpFX;
     [SerializeField] private AudioClip[] ActiveAudioSet;
@@ -141,6 +143,7 @@ public class Player : MonoBehaviour
 
         if (!isDead && !isFrozen)
         {
+            TauntInput();
             UpdateMovement();
             UpdateWeaponDirection();
 
@@ -402,6 +405,36 @@ public class Player : MonoBehaviour
 
     private void TauntInput()
     {
+        TauntCooldownCurrent += Time.deltaTime;
 
+        if (TauntCooldownCurrent > TauntCooldown)
+        {
+            Vector2 input = new Vector2(Input.GetAxis("TauntX" + playerID), Input.GetAxis("TauntY" + playerID));
+            print(input.ToString());
+            if (input.x < -0.1f)
+            {
+                TauntCooldownCurrent = 0.0f;
+                PlaySound(ActiveAudioSet[(int)SoundFXType.TOUNT1]);
+                return;
+            }
+            else if (input.x > 0.1f)
+            {
+                TauntCooldownCurrent = 0.0f;
+                PlaySound(ActiveAudioSet[(int)SoundFXType.TOUNT2]);
+                return;
+            }
+            else if (input.y < -0.1f)
+            {
+                TauntCooldownCurrent = 0.0f;
+                PlaySound(ActiveAudioSet[(int)SoundFXType.TOUNT3]);
+                return;
+            }
+            else if (input.y > 0.1f)
+            {
+                TauntCooldownCurrent = 0.0f;
+                PlaySound(ActiveAudioSet[(int)SoundFXType.TOUNT4]);
+                return;
+            }
+        }
     }
 }

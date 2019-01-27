@@ -185,8 +185,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("End Game Triggered!");
 
         audioManager.StopMusic(BattleMusicName);
+        audioManager.PlaySound("EndGame");
         EndGamePanel.SetActive(true);
-
+        timeManager.matchTimePanel.SetActive(false);
         GrandPoints();
 
         SetGameState(GameState.ENDGAME);
