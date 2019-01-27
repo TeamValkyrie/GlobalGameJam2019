@@ -92,7 +92,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20.735985, y: 2.28055}
+  m_Size: {x: 17.7, y: 4.8}
   m_EdgeRadius: 0
 --- !u!58 &7239036491082317076
 CircleCollider2D:
@@ -155,7 +155,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 26.443657, y: 2.071424}
+  m_Size: {x: 23.6, y: 4.8}
   m_EdgeRadius: 0
 --- !u!61 &8245640749081496508
 BoxCollider2D:
@@ -181,7 +181,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 20.944263, y: 2.28055}
+  m_Size: {x: 17.6, y: 4.8}
   m_EdgeRadius: 0
 --- !u!82 &3075372085349938093
 AudioSource:
