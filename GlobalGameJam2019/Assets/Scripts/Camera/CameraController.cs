@@ -36,6 +36,11 @@ public class CameraController : MonoBehaviour
     private List<Transform> targets;
     private Camera mainCamera;
 
+    private float previewTime = 4.0f;
+    private float currentPreviewTime = 0.0f;
+    private int currentPreviewIndex = 0;
+    private bool isInPreview;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,16 +64,35 @@ public class CameraController : MonoBehaviour
     // LateUpdate is called every frame, if the Behaviour is enabled
     void LateUpdate()
     {
-        if (targets.Count < 1)
+        if (!isInPreview)
         {
-            return;
+            if (targets.Count < 1)
+            {
+                return;
+            }
+
+            Move();
+
+            if (enableZooming)
+            {
+                Zoom();
+            }
         }
-
-        Move();
-
-        if (enableZooming)
+        else
         {
-            Zoom();
+            currentPreviewTime += Time.deltaTime;
+            transform.position = targets[currentPreviewIndex].position;
+            mainCamera.fieldOfView = 200.0f;
+            if(currentPreviewTime >= previewTime)
+            {
+                currentPreviewIndex++;
+                if(currentPreviewIndex > targets.Count - 1)
+                {
+                    isInPreview = false;
+                    currentPreviewIndex--;
+                }
+            }
+            
         }
     }
 
@@ -130,5 +154,13 @@ public class CameraController : MonoBehaviour
         }
 
         return bounds.center;
+    }
+
+    public void PreviewPlayer(float Time)
+    {
+        previewTime = Time;
+        currentPreviewIndex = 0;
+        currentPreviewTime = 0;
+        isInPreview = true;
     }
 }

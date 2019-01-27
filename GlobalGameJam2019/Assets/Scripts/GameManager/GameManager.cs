@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public PlayerManager playerManager;
 
+    [HideInInspector]
+    public CameraController cameraController;
+
     [SerializeField]
     private GameState gameState = GameState.NONE;
 
@@ -70,6 +73,7 @@ public class GameManager : MonoBehaviour
         timeManager = FindObjectOfType<TimeManager>();
         canvasManager = FindObjectOfType<CanvasManager>();
         playerManager = FindObjectOfType<PlayerManager>();
+        cameraController = FindObjectOfType<CameraController>();
 
         Scores = new List<int>();
         Scores.Add(0);
@@ -145,9 +149,12 @@ public class GameManager : MonoBehaviour
                 SetGameState(GameState.COUNTING);
                 break;
             case GameState.COUNTING:
+                playerManager.FreezePlayerMovement();
+                //cameraController.PreviewPlayer(timeManager.countdownFrom);
                 StartCoroutine(StartCountdown());
                 break;
             case GameState.PLAYING:
+                playerManager.UnFreezePlayerMovement();
                 canvasManager.ToggleOptions(false);
                 canvasManager.TogglePause(false);
                 audioManager.PlayMusic(BattleMusicName);
