@@ -51,6 +51,7 @@ public class PlayerManager : MonoBehaviour
 
     public void FindSpawnPoints()
     {
+        spawnPoints = new List<Transform>();
         GameObject[] foundSpawnPoints = GameObject.FindGameObjectsWithTag("PlayerSpawnPoint");
 
         foreach(GameObject foundSpawnPoint in foundSpawnPoints)
