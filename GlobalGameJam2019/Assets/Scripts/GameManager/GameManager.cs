@@ -103,21 +103,21 @@ public class GameManager : MonoBehaviour
 
 
 
-        if (Input.GetButtonUp("Cancel"))
-        {
-            if (gameState == GameState.PLAYING)
-            {
-                SetGameState(GameState.PAUSED);
-            }
-            else if (gameState == GameState.PAUSED)
-            {
-                SetGameState(GameState.PLAYING);
-            }
-            else if (gameState == GameState.OPTIONS)
-            {
-                SetGameState(GameState.PAUSED);
-            }
-        }
+        //if (Input.GetButtonUp("Cancel"))
+        //{
+        //    if (gameState == GameState.PLAYING)
+        //    {
+        //        SetGameState(GameState.PAUSED);
+        //    }
+        //    else if (gameState == GameState.PAUSED)
+        //    {
+        //        SetGameState(GameState.PLAYING);
+        //    }
+        //    else if (gameState == GameState.OPTIONS)
+        //    {
+        //        SetGameState(GameState.PAUSED);
+        //    }
+        //}
     }
 
     private void CheckForEndGame()

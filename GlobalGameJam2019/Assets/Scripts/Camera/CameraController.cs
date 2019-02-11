@@ -53,7 +53,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        FindTargets();
     }
 
     // LateUpdate is called every frame, if the Behaviour is enabled
@@ -77,9 +77,10 @@ public class CameraController : MonoBehaviour
     {
         GameObject[] foundTargets = GameObject.FindGameObjectsWithTag(targetTag);
 
+        targets = new List<Transform>();
         foreach (GameObject foundTarget in foundTargets)
         {
-            if (foundTarget == null || targets.Contains(foundTarget.transform))
+            if (foundTarget == null || targets.Contains(foundTarget.transform) || foundTarget.GetComponent<Player>().isDead)
                 continue;
 
             targets.Add(foundTarget.transform);
